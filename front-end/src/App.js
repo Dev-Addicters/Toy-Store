@@ -31,14 +31,6 @@ function App() {
 
   return (
     <div>
-<<<<<<< HEAD
-      Hello World
-      <ul>
-        {days.map((day) => (
-          <li key={day.name}>{day.name}</li>
-        ))}
-      </ul>
-=======
       <Router>
         <NavBar />
           <main>
@@ -64,7 +56,6 @@ function App() {
             </Switch>
           </main>
       </Router>
->>>>>>> 0a6eebb7ca40818fcd8c59730e25f38abbd70ba3
     </div>
   );
 }

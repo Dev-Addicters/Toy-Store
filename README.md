@@ -1,4 +1,4 @@
-# PERN Final Project Template
+# TOY STORE Project Template
 
 - select `use this template`
 - clone this repo

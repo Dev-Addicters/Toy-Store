@@ -11,3 +11,47 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.four0four{
+  background-image: url("https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Page.gif") ;
+  width: 1530px;
+  height: 820px;
+}
+.navbar{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  background-color: black;
+  justify-content: space-around;
+  height: 100px;
+}
+.store{
+  color:  azure;
+}
+.navLink{
+  text-decoration: none;
+  color: azure;
+  margin-top: 40px;
+}
+.navLink:hover{
+  color: black;
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+.navinput{
+  margin-top: 40px;
+  width: 300px;
+  font-size: 25px;
+  border-radius: 30px;
+  margin-left: 100px;
+}
+.navProfile{
+ filter:invert(100%);
+ margin-top: 30px;
+}
+.navcar{
+  margin-top: 30px;
+}
+.navButton{
+  margin-top: 40px;
+  font-size: 20px;
+}

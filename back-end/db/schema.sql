@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS test;
+DROP TABLE IF EXISTS inv_products;
 
-CREATE TABLE test (
+CREATE TABLE inv_products (
     id SERIAL PRIMARY KEY, 
     name TEXT
 );

@@ -1,4 +1,4 @@
-INSERT INTO test (name) VALUES
+INSERT INTO inv_products (name) VALUES
 ('Monday'),
 ('Tuesday'),
 ('Wednesday'),

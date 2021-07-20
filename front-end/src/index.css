@@ -1,57 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+@font-face {
+  font-family: GreatVictorian;
+  src: url("./GreatVictorian.otf") format("opentype");
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a:link {
+  text-decoration: none;
 }
-.four0four{
-  background-image: url("https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Page.gif") ;
-  width: 1530px;
-  height: 820px;
+
+a:visited {
+  color: azure;
 }
-.navbar{
+h1{
+  font-family: "GreatVictorian", sans-serif;
+  font-weight: 400;
+  font-size: 3em;
+}
+
+.four0four {
+  background-image: url("https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Page.gif");
+  width: 100vw;
+  height: 100vh;
+}
+
+.navBar,
+.footer {
   display: flex;
   flex-direction: row;
   text-align: center;
   background-color: black;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 100px;
+  min-height: 10vh;
 }
-.store{
-  color:  azure;
+.navBar svg {
+  font-size: 36px;
+  color: azure;
 }
-.navLink{
+.navBar {
+  visibility: visible;
+}
+
+.footer {
+  visibility: hidden;
+}
+
+.store {
+  color: azure;
+}
+.navLink {
   text-decoration: none;
   color: azure;
   margin-top: 40px;
 }
-.navLink:hover{
+.navLink:hover {
   color: black;
   background-color: aliceblue;
   border-radius: 5px;
 }
-.navinput{
+.navInput {
   margin-top: 40px;
   width: 300px;
   font-size: 25px;
   border-radius: 30px;
   margin-left: 100px;
 }
-.navProfile{
- filter:invert(100%);
- margin-top: 30px;
-}
-.navcar{
-  margin-top: 30px;
-}
-.navButton{
+.navProfile,
+.navCar {
   margin-top: 40px;
-  font-size: 20px;
+}
+
+.navButton {
+  margin-top: 44px;
+  font-size: 18px;
+  border-radius: 10px;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+@media screen and (max-width: 1100px) {
+  
+  /* main {
+    height: auto;
+  } */
+  h1{
+    font-size: 4em;
+  }
+
+  .hidden-visually {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .navLink h2 {
+    visibility: hidden;
+  }
+
+  .footer {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .footer svg {
+    font-size: 2em;
+    color: azure;
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+  main {
+    height: 70vh;
+  }
+  h1{
+    font-size: 4em;
+  }
+  .footer {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .footer svg {
+    font-size: 3em;
+    color: azure;
+  }
+
+  .hidden-visually {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .navLink h2 {
+    visibility: hidden;
+  }
+  .navBar {
+    width: 100vw;
+    height: auto;
+    display: grid;
+    grid-template-rows: 1fr;
+    place-items: center;
+    gap: 15px;
+  }
+
+  .navInput {
+    align-self: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .navBar a:nth-child(1) {
+    display: flex;
+  }
+  .top {
+    grid-area: 1 / 1 / -1 / -1;
+    margin: 4px 0px 0px 0px;
+  }
+  .navBar form {
+    width: 100%;
+  }
 }

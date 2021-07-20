@@ -1,18 +1,32 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 
-export default function NavBar() {
-    return (
-        <div className="navbar">
-            <h1 className="store">TOY-STORE</h1>
-            <Link to="/items" className="navLink"><h1>PRODUCT</h1></Link>
-            <Link to="/items" className="navLink"><h1>FEATURED</h1></Link>
-            <form>
-                <input className="navinput"></input>
-            </form>
-            <Link to="/items" className="navProfile"><h1>👤</h1></Link>
-            <Link to="/items" className="navcar"><h1>🛅</h1></Link>
-            <Link to="/items/new" ><button className="navButton">New Items</button></Link>
-        </div>
-    )
+export default function NavBar () {
+  return (
+    <div className='navBar'>
+      <Link to="/"className='top'>
+        <h1 className='store top'>Toy Store</h1>
+      </Link>
+      <Link to='/products' className='navLink hidden-visually '>
+        <h2>PRODUCT</h2>
+      </Link>
+      <Link to='/featured' className='navLink hidden-visually '>
+        <h2>FEATURED</h2>
+      </Link>
+      <form>
+        <input className='navInput'></input>
+      </form>
+      <Link to='/login' className='navProfile hidden-visually '>
+        <AccountCircleIcon id='userLogin' />
+      </Link>
+      <Link to='/cart' className='navCar hidden-visually'>
+        <ShoppingCartIcon />
+      </Link>
+      <Link to='/products/new'>
+        <button className='navButton hidden-visually'>New Items</button>
+      </Link>
+    </div>
+  )
 }

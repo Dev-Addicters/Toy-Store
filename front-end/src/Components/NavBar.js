@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import SearchIcon from '@material-ui/icons/Search';
 
 export default function NavBar () {
   return (
@@ -10,12 +11,13 @@ export default function NavBar () {
         <h1 className='store top'>Toy Store</h1>
       </Link>
       <Link to='/products' className='navLink hidden-visually '>
-        <h2>PRODUCT</h2>
+        <h2>PRODUCTS</h2>
       </Link>
       <Link to='/featured' className='navLink hidden-visually '>
         <h2>FEATURED</h2>
       </Link>
       <form>
+        <SearchIcon />
         <input className='navInput'></input>
       </form>
       <Link to='/login' className='navProfile hidden-visually '>

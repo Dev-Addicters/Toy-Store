@@ -95,9 +95,6 @@ h1{
 
 @media screen and (max-width: 1100px) {
   
-  /* main {
-    height: auto;
-  } */
   h1{
     font-size: 4em;
   }

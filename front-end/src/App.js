@@ -16,16 +16,34 @@ const API = apiURL()
 
 function App () {
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
+    getAllProducts()
+  }, [])
+
+  const addToCart = id => {
+    setCart([...cart].concat(id))
+  }
+
+  const getAllProducts = () => {
     axios
-      .get(`${API}/products`)
+    .get(`${API}/products`)
+    .then(
+      response => setProducts(response.data),
+      error => console.log('get', error)
+    )
+    .catch(c => console.warn('catch', c))
+  }
+  const getProductsByCategory = category => {
+    axios
+      .get(`${API}/products?category=${category}`)
       .then(
         response => setProducts(response.data),
         error => console.log('get', error)
       )
       .catch(c => console.warn('catch', c))
-  }, [])
+  }
 
   return (
     <Router>
@@ -35,11 +53,14 @@ function App () {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/products'>
-            <Products products={products} />
+          <Route exact path='/products/category/:category'>
+          <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>
           </Route>
           <Route exact path='/products/new'>
             <New />
+          </Route>
+          <Route exact path='/products'>
+            <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>
           </Route>
           <Route exact path='/products/:id'>
             <Show product={products}/>

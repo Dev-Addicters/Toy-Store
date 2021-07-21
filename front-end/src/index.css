@@ -15,7 +15,6 @@ body {
   background-color: blanchedalmond;
 }
 
-
 a:link {
   text-decoration: none;
 }
@@ -62,7 +61,7 @@ div.tabs > a > div {
 div.tabs > a:hover > div {
   display: flex;
   box-shadow: 0 5px 15px -4px rgba(0, 0, 0, 0.3);
-  z-index: 1;
+  z-index: 999;
 }
 
 .four0four {
@@ -161,7 +160,6 @@ div.tabs > a:hover > div {
   align-items: center;
   background-color: aliceblue;
   border-radius: 5px;
-  z-index: -1;
   box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.9);
 }
 .productCard img:first-of-type {
@@ -177,6 +175,11 @@ div.tabs > a:hover > div {
 .productCard p {
   font-size: 18px;
   text-align: center;
+}
+
+.productContainer a,
+.productContainer a:visited {
+  color: black;
 }
 
 #root {

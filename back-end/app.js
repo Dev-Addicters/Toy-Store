@@ -5,6 +5,7 @@ const express = require("express");
 // CONFIGURATION
 const app = express();
 const productsController = require("./controllers/productsController");
+const itemReviewsController = require("./controllers/itemReviewsController");
 
 // MIDDLEWARE
 app.use(cors());
@@ -16,10 +17,11 @@ app.get("/", (req, res) => {
 });
 
 app.use("/products", productsController);
+app.use("/itemReviews", itemReviewsController);
 
 app.get("*", (req, res) => {
   res.status(404).send("Page not found.");
-})
+});
 
 // EXPORT
 module.exports = app;

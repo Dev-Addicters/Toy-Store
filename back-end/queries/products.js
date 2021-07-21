@@ -3,7 +3,7 @@ const { getAllProductsQuery } = require("../helpers/setDbQuery");
 
 const getAllProducts = async (objQuery) => {
     try {
-        let dbQuery = getAllProductsQuery(objQuery);
+        const dbQuery = getAllProductsQuery(objQuery);
         if (!dbQuery.qParams.length)
             return await db.any(dbQuery.qString);
 
@@ -30,10 +30,10 @@ const getProducts = async (ids) => {
 const createProducts = async (items) => {
     try {
         if (!items.length)
-            return await db.one("INSERT INTO inv_products (name, price, image, category, isNEW) VALUES ($1, $2, $3, $4, $5) RETURNING *", [items.name, items.price, items.image, items.category, items.isNEW]);
+            return await db.one("INSERT INTO inv_products (name, price, image, category, is_new) VALUES ($1, $2, $3, $4, $5) RETURNING *", [items.name, items.price, items.image, items.category, items.is_new]);
 
         return await db.tx(t => {
-            const queries = items.map(item => db.one("INSERT INTO inv_products (name, price, image, category, isNEW) VALUES ($1) RETURNING *", [item.name, item.price, item.image, item.category, item.isNEW]));
+            const queries = items.map(item => db.one("INSERT INTO inv_products (name, price, image, category, is_new) VALUES ($1) RETURNING *", [item.name, item.price, item.image, item.category, item.is_new]));
             return t.batch(queries);
         })
     } catch (err) {
@@ -44,10 +44,10 @@ const createProducts = async (items) => {
 const updateProducts = async (ids, items) => {
     try {
         if (!ids.includes(","))
-            return await db.one("UPDATE inv_products SET name=$1, price=$2, image=$3, category=$4, isNEW=$5 WHERE id=$6 RETURNING *", [items.name, items.price, items.image, items.category, items.isNEW, ids]);
+            return await db.one("UPDATE inv_products SET name=$1, price=$2, image=$3, category=$4, is_new=$5 WHERE id=$6 RETURNING *", [items.name, items.price, items.image, items.category, items.is_new, ids]);
 
         return await db.tx(t => {
-            const queries = ids.split(",").map((id, i) => db.one("UPDATE inv_products SET name=$1, price=$2, image=$3, category=$4, isNEW=$5 WHERE id=$6 RETURNING *", [items[i].name, items[i].price, items[i].image, items[i].category, items[i].isNEW, ids]));
+            const queries = ids.split(",").map((id, i) => db.one("UPDATE inv_products SET name=$1, price=$2, image=$3, category=$4, is_new=$5 WHERE id=$6 RETURNING *", [items[i].name, items[i].price, items[i].image, items[i].category, items[i].is_new, ids]));
             return t.batch(queries);
         })
     } catch (err) {

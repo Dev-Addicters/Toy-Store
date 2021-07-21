@@ -3,7 +3,7 @@ const getAllProductsQuery = ({ search, category, isNew, sortBy, order }) => {
     const qParams = [];
 
     if (search) {
-        qParams.push(`%${search}%`)
+        qParams.push(`%${search}%`);
         qString += ` WHERE name ILIKE $${qParams.length}`;
     }
 
@@ -14,7 +14,7 @@ const getAllProductsQuery = ({ search, category, isNew, sortBy, order }) => {
 
     isNew = isNew?.toUpperCase();
     if (isNew === "TRUE" || isNew === "FALSE") {
-        qString += `${qString.includes("WHERE") ? " AND" : " WHERE"} isNEW=${isNew}`;
+        qString += `${qString.includes("WHERE") ? " AND" : " WHERE"} is_new=${isNew}`;
     }
 
     const columns = ["id", "name", "category", "price"];

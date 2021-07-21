@@ -63,7 +63,7 @@ function App () {
             <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>
           </Route>
           <Route exact path='/products/:id'>
-            <Show />
+            <Show product={products}/>
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit />

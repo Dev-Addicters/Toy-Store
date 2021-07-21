@@ -10,12 +10,5 @@ CREATE TABLE inv_products (
 );
 
 /*
-name
-price
-img url
-category
-isNew bool
-
-
-quatity stretch 100
+quantity 100 stretch
 */

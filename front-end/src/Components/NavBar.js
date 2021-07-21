@@ -81,7 +81,7 @@ export default function NavBar () {
               </p>
             </div>
             </Link>
-            <Link to="/products/category/cartoon">
+            <Link to="/products/category/cartoons">
             <div className='headContainer'>
               <img src={cartoon} alt='Cartoon' className='productImage' />
               <p>

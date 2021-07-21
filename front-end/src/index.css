@@ -65,9 +65,18 @@ div.tabs > a:hover > div {
 }
 
 .four0four {
-  background-image: url("https://freefrontend.com/assets/img/html-funny-404-pages/HTML-404-Page.gif");
   width: 100vw;
-  height: 100vh;
+  height: 100%;
+  object-fit: contain;
+}
+.four0four h1 {
+  position: absolute;
+}
+.four0four img {
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  position: relative;
 }
 
 .navBar,
@@ -200,8 +209,8 @@ div.tabs > a:hover > div {
     font-size: 4em;
     transform: translateY(-14px);
   }
-  .homeimg{
-    width: 800px;
+  .homeimg {
+    width: 80%;
     margin-left: 50px;
   }
   .hidden-visually {
@@ -231,6 +240,9 @@ div.tabs > a:hover > div {
     color: azure;
   }
 
+  .four0four {
+    height: 75vh;
+  }
   #searchIcon {
     display: none;
   }

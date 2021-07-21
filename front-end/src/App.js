@@ -10,6 +10,7 @@ import Products from './Pages/Products'
 import New from './Pages/New'
 import Show from './Pages/Show'
 import Edit from './Pages/Edit'
+import Cart from './Pages/Cart'
 import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
@@ -17,6 +18,7 @@ const API = apiURL()
 function App () {
   const [products, setProducts] = useState([])
   const [cart, setCart] = useState([])
+  const [ cartItems, setCartItems] = useState([])
 
   useEffect(() => {
     getAllProducts()
@@ -45,6 +47,22 @@ function App () {
       .catch(c => console.warn('catch', c))
   }
 
+
+
+
+  const getCartList = () => {
+    const listItems = cart.join(",")
+    if (listItems) {
+    axios
+    .get(`${API}/products/${listItems}`)
+    .then(
+      response => setCartItems(response.data),
+      error => console.log('get', error)
+    )
+    .catch(c => console.warn('catch', c))
+  }
+  }
+
   return (
     <Router>
       <NavBar />
@@ -52,6 +70,9 @@ function App () {
         <Switch>
           <Route exact path='/'>
             <Home />
+          </Route>
+          <Route exact path='/cart'>
+            <Cart cartItems={cartItems} getCartList={getCartList} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/category/:category'>
           <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>

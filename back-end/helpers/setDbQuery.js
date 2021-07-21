@@ -24,10 +24,34 @@ const getAllProductsQuery = ({ search, category, isNew, sortBy, order }) => {
         qString += ` ORDER BY ${sortBy} ${order === "ASC" || order === "DESC" ? order : "ASC"}`;
     }
 
-    // console.log("QUERY Made: ", qString + ",", qParams); log this in server?
     return { qString, qParams };
 }
 
+const updateProductsQuery = (ids, data) => {
+    const constructQuery = (id, item) => {
+        let qString = "UPDATE inv_products SET";
+        const qParams = [];
+
+        const params = ["name", "price", "image", "category", "quantity", "is_new"];
+        for (const key in item) {
+            if (params.includes(key)) {
+                qParams.push(item[key]);
+                qString += `${qParams.length > 1 ? "," : ""} ${key}=${key === "quantity" ? "quantity+" : ""}$${qParams.length}`;
+            }
+        }
+
+        qParams.push(id);
+        qString += ` WHERE id=$${qParams.length} RETURNING *`;
+        return { qString, qParams };
+    }
+
+    if (!ids.includes(","))
+        return constructQuery(ids, data);
+
+    return ids.split(",").map((id, i) => constructQuery(id, data[i]));
+}
+
 module.exports = {
-    getAllProductsQuery
+    getAllProductsQuery,
+    updateProductsQuery
 }

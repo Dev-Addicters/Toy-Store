@@ -42,7 +42,7 @@ function App () {
             <New />
           </Route>
           <Route exact path='/products/:id'>
-            <Show />
+            <Show product={products}/>
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit />

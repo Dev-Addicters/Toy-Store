@@ -8,33 +8,57 @@ const getAllProducts = async () => {
     }
 }
 
-const getOneProduct = async (id) => {
+const getProducts = async (ids) => {
     try {
-        return await db.one("SELECT * FROM inv_products WHERE id=$1", id);
+        if (!ids.includes(","))
+            return await db.one("SELECT * FROM inv_products WHERE id=$1", ids);
+
+        return await db.tx(t => {
+            const queries = ids.split(",").map(id => db.one("SELECT * FROM inv_products WHERE id=$1", id));
+            return t.batch(queries);
+        })
     } catch (err) {
         return "error";
     }
 }
 
-const createProduct = async (item) => {
+const createProducts = async (items) => {
     try {
-        return await db.one("INSERT INTO inv_products (name) VALUES ($1) RETURNING *", item.name);
+        if (!items.length)
+            return await db.one("INSERT INTO inv_products (name) VALUES ($1) RETURNING *", items.name);
+
+        return await db.tx(t => {
+            const queries = items.map(item => db.one("INSERT INTO inv_products (name) VALUES ($1) RETURNING *", item.name));
+            return t.batch(queries);
+        })
     } catch (err) {
         return "error";
     }
 }
 
-const updateProduct = async (id, item) => {
+const updateProducts = async (ids, items) => {
     try {
-        return await db.one("UPDATE inv_products SET name=$1 WHERE id=$2 RETURNING *", [item.name, id]);
+        if (!ids.includes(","))
+            return await db.one("UPDATE inv_products SET name=$1 WHERE id=$2 RETURNING *", [items.name, ids]);
+
+        return await db.tx(t => {
+            const queries = ids.split(",").map((id, i) => db.one("UPDATE inv_products SET name=$1 WHERE id=$2 RETURNING *", [items[i].name, id]));
+            return t.batch(queries);
+        })
     } catch (err) {
         return "error";
     }
 }
 
-const deleteProduct = async (id) => {
+const deleteProducts = async (ids) => {
     try {
-        return await db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", id);
+        if (!ids.includes(","))
+            return await db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", ids);
+
+        return await db.tx(t => {
+            const queries = ids.split(",").map(id => db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", id));
+            return t.batch(queries);
+        })
     } catch (err) {
         return "error";
     }
@@ -42,8 +66,8 @@ const deleteProduct = async (id) => {
 
 module.exports = {
     getAllProducts,
-    getOneProduct,
-    createProduct,
-    updateProduct,
-    deleteProduct
+    getProducts,
+    createProducts,
+    updateProducts,
+    deleteProducts
 }

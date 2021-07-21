@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchIcon from '@material-ui/icons/Search'
+import disney from './images/disney-head.png'
+import got from './images/got-head.png'
+import harry from './images/harry-head.png'
+import marvel from './images/marvel-head.png'
+import movies from './images/movies-head.png'
+import cartoon from './images/cartoon-head.png'
+import exclusive from './images/exclusive-head.png'
+import soon from './images/soon-head.png'
 
 export default function NavBar () {
   return (
@@ -17,8 +25,35 @@ export default function NavBar () {
           className='navLink hidden-visually '
         >
           <h3>PRODUCTS</h3>
-          <div>
-            <p>List of Products</p>
+          <div className='productContainer'>
+            <div className='headContainer'>
+              <img src={disney} alt='Disney' className='productImage' />
+              <p>
+                <b>Disney</b>
+                <br />& Pixar
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={got} alt='Game of Thrones' className='productImage' />
+              <p>
+                <b>Game of Thrones</b>
+                <br />& TV
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={harry} alt='Harry Potter' className='productImage' />
+              <p>
+                <b>Harry Potter</b>
+                <br />& Series
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={marvel} alt='Marvel' className='productImage' />
+              <p>
+                <b>Marvel</b>
+                <br />& SuperHeroes
+              </p>
+            </div>
           </div>
         </Link>
         <Link
@@ -27,8 +62,35 @@ export default function NavBar () {
           className='navLink hidden-visually '
         >
           <h3>FEATURED</h3>
-          <div>
-            <p>Featured</p>
+          <div className='productContainer'>
+            <div className='headContainer'>
+              <img src={movies} alt='Movies' className='productImage' />
+              <p>
+                <b>Movies</b>
+                <br />& Villians
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={cartoon} alt='Cartoon' className='productImage' />
+              <p>
+                <b>Cartoons</b>
+                <br />& Comedy
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={exclusive} alt='Exclusive' className='productImage' />
+              <p>
+                <b>Exclusive</b>
+                <br />& Limited Edition
+              </p>
+            </div>
+            <div className='headContainer'>
+              <img src={soon} alt='Coming Soon' className='productImage' />
+              <p>
+                <b>Coming Soon</b>
+                <br />& Collectibles
+              </p>
+            </div>
           </div>
         </Link>
       </div>

@@ -46,16 +46,20 @@ div.tabs > a + a {
 div.tabs > a > div {
   position: absolute;
   top: 100%;
-  left: -25vw;
+  left: -23vw;
   width: 100vw;
   padding: 0.5em;
   border-radius: 0 3px 3px 3px;
   display: none;
   background-color: aliceblue;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 div.tabs > a:hover > div {
-  display: block;
+  display: flex;
+  box-shadow: 0 5px 15px -4px rgba(0, 0, 0, 0.3);
 }
 
 .four0four {
@@ -118,6 +122,21 @@ div.tabs > a:hover > div {
   margin-top: 44px;
   font-size: 18px;
   border-radius: 10px;
+}
+
+.headContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.productImage {
+  width: 160px;
+  height: 89px;
+}
+
+.productImage:hover {
+  transform: translateY(6px);
 }
 
 #root {

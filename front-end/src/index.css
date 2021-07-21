@@ -84,6 +84,7 @@ div.tabs > a:hover > div {
 }
 .navBar {
   visibility: visible;
+  box-shadow: 0 12px 6.1px rgba(0, 0, 0, 0.07), 0 21px 51px rgba(0, 0, 0, 0.028);
 }
 
 .footer {
@@ -139,11 +140,47 @@ div.tabs > a:hover > div {
   transform: translateY(6px);
 }
 
+.repeatAutoMinMax {
+  height: 100%;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  margin: 2vw 4vw 2vw 4vw;
+  overflow: scroll;
+}
+
+.productCard {
+  width: 350px;
+  height: 520px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+.productCard img:first-of-type {
+  width: 100px;
+  height: 55px;
+  transform: translateY(-24px);
+}
+
+.productCard img {
+  width: 300px;
+  height: 260px;
+}
+.productCard p {
+  font-size: 18px;
+  text-align: center;
+}
+
 #root {
   width: 100vw;
   height: 100vh;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  margin: 0;
+  padding: 0;
 }
 
 #searchIcon {
@@ -172,10 +209,12 @@ div.tabs > a:hover > div {
   }
 
   .footer {
+    height: auto;
     visibility: visible;
     display: flex;
     align-items: center;
     justify-content: space-around;
+
   }
   .footer svg {
     font-size: 2em;
@@ -189,38 +228,13 @@ div.tabs > a:hover > div {
 
 @media screen and (max-width: 380px) {
   main {
-    height: 70vh;
+    height: 66vh;
   }
   h1 {
-    font-size: 4em;
-  }
-  .footer {
-    visibility: visible;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-  }
-  .footer svg {
-    font-size: 3em;
-    color: azure;
+    transform: translateY(14px);
   }
 
-  .hidden-visually {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-  }
-
-  .navLink h3 {
-    visibility: hidden;
-  }
   .navBar {
-    width: 100vw;
     height: auto;
     display: grid;
     grid-template-rows: 1fr;
@@ -243,6 +257,10 @@ div.tabs > a:hover > div {
   }
   .navBar form {
     width: 100%;
+  }
+
+  .footer {
+    transform: translateY(11px);
   }
 
   #searchIcon {

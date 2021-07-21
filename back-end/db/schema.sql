@@ -10,6 +10,14 @@ CREATE TABLE inv_products (
     is_new BOOLEAN
 );
 
-/*
-quantity 100 stretch
-*/
+DROP TABLE IF EXISTS item_reviews;
+
+CREATE TABLE item_reviews (
+    id SERIAL PRIMARY KEY,
+    reviewer TEXT,
+    title TEXT,
+    content TEXT,
+    rating NUMERIC,
+    CHECK (rating >= 0 AND rating <= 5),
+    product_id INTEGER REFERENCES inv_products (id) ON DELETE CASCADE
+);

@@ -50,5 +50,10 @@ VALUES
 ('Peacemaker', '11.00', 'https://cdn.shopify.com/s/files/1/1052/2158/products/56014_SS2_Peacemaker_POP_GLAM-WEB_300x2000.png?v=1625784471', 'Coming Soon', 10, true),
 ('Gabe & Bone', '21.00', 'https://cdn.shopify.com/s/files/1/1052/2158/products/58003_BooHollow_Gabe_PakaPakaRide_GLAM-WEB_300x2000.png?v=1621869925', 'Coming Soon', 20, false);
 
+INSERT INTO item_reviews
+(product_id, reviewer, title, content, rating)
+VALUES
+('1', 'Hady', 'So Cool!!', 'I just love how Venom and King Pin were merged into one character, such a cool concept!! Would definitely recommend getting one!!!', 5);
+
 
 

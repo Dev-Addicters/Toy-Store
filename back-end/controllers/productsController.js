@@ -9,7 +9,7 @@ const dataVerification = (req, res, next) => {
 }
 
 products.get("/", async (req, res) => {
-    const allItems = await getAllProducts();
+    const allItems = await getAllProducts(req.query);
     res.json(allItems);
 })
 
@@ -22,11 +22,11 @@ products.get("/:ids", async (req, res) => {
                 console.log(msgNotFound(ids));
                 throw msgNotFound(ids);
             }
-            return res.json(item);
+            return res.json([item]);
         }
 
         const items = await getProducts(ids);
-        res.json(items)
+        res.json(items);
     } catch (err) {
         res.status(404).json({ error: err });
     }
@@ -39,7 +39,7 @@ products.post("/", dataVerification, async (req, res) => {
             console.log(`Error adding ${req.body} to database.`);
             throw `Error adding ${req.body} to database.`;
         }
-        res.json(newItems);
+        res.json(newItems.length ? newItems : [newItems]);
     } catch (err) {
         res.status(404).json({ error: err });
     }
@@ -53,7 +53,7 @@ products.put("/:ids", dataVerification, async (req, res) => {
             console.log(msgNotFound(ids));
             throw msgNotFound(ids);
         }
-        res.json(updatedItems);
+        res.json(updatedItems.length ? updatedItems : [updatedItems]);
     } catch (err) {
         res.status(404).json({ error: err });
     }
@@ -67,7 +67,7 @@ products.delete("/:ids", async (req, res) => {
             console.log(msgNotFound(ids));
             throw msgNotFound(ids);
         }
-        res.json(deletedItems);
+        res.json(deletedItems.length ? deletedItems : [deletedItems]);
     } catch (err) {
         res.status(404).json({ error: err });
     }

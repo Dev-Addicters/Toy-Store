@@ -1,8 +1,13 @@
 const db = require("../db/dbConfig");
+const { getAllProductsQuery } = require("../helpers/setDbQuery");
 
-const getAllProducts = async () => {
+const getAllProducts = async (objQuery) => {
     try {
-        return await db.any("SELECT * FROM inv_products");
+        let dbQuery = getAllProductsQuery(objQuery);
+        if (!dbQuery.qParams.length)
+            return await db.any(dbQuery.qString);
+
+        return await db.any(dbQuery.qString, dbQuery.qParams);
     } catch (err) {
         return "error";
     }

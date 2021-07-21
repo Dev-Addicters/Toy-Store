@@ -2,22 +2,39 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@material-ui/icons/Search'
 
 export default function NavBar () {
   return (
     <div className='navBar'>
-      <Link to="/"className='top'>
+      <Link to='/' className='top'>
         <h1 className='store top'>Toy Store</h1>
       </Link>
-      <Link to='/products' className='navLink hidden-visually '>
-        <h2>PRODUCTS</h2>
-      </Link>
-      <Link to='/featured' className='navLink hidden-visually '>
-        <h2>FEATURED</h2>
-      </Link>
+      <div className='tabs'>
+        <Link
+          to='/products'
+          id='productsTab'
+          className='navLink hidden-visually '
+        >
+          <h3>PRODUCTS</h3>
+          <div>
+            <p>List of Products</p>
+          </div>
+        </Link>
+        <Link
+          to='/featured'
+          id='featuredTab'
+          className='navLink hidden-visually '
+        >
+          <h3>FEATURED</h3>
+          <div>
+            <p>Featured</p>
+          </div>
+        </Link>
+      </div>
+
       <form>
-        <SearchIcon />
+        <SearchIcon id='searchIcon' />
         <input className='navInput'></input>
       </form>
       <Link to='/login' className='navProfile hidden-visually '>

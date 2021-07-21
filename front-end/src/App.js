@@ -16,6 +16,7 @@ const API = apiURL()
 
 function App () {
   const [products, setProducts] = useState([])
+  const [cart, setCart] = useState([])
 
   useEffect(() => {
     axios
@@ -27,6 +28,10 @@ function App () {
       .catch(c => console.warn('catch', c))
   }, [])
 
+  const addToCart = id => {
+    setCart([...cart].concat(id))
+  }
+
   return (
     <Router>
       <NavBar />
@@ -36,7 +41,7 @@ function App () {
             <Home />
           </Route>
           <Route exact path='/products'>
-            <Products products={products} />
+            <Products products={products} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/new'>
             <New />

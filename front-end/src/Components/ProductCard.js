@@ -1,10 +1,11 @@
 import React from 'react'
 import newProduct from './images/new.png'
 
-export default function ProductCard ({ product }) {
+export default function ProductCard ({ product, addToCart}) {
+
   return (
     <div className='productCard'>
-      {product.isnew && <img src={newProduct} alt='New' />}
+      {product.is_new && <img src={newProduct} alt='New' href={`/products/${product.id}`}/>}
       <img src={product.image} alt={product.name} />
       <p>
         {product.category}
@@ -12,7 +13,7 @@ export default function ProductCard ({ product }) {
         <b>{product.name}</b>
         <br />$ {product.price}
       </p>
-      <button>Add to Cart</button>
+      <button onClick={()=>addToCart(product.id)} >Add to Cart</button>
     </div>
   )
 }

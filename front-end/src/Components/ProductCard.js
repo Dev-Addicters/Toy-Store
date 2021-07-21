@@ -1,11 +1,12 @@
 import React from 'react'
 import newProduct from './images/new.png'
+import onePixel from './images/1px.png'
 
 export default function ProductCard ({ product, addToCart}) {
 
   return (
     <div className='productCard'>
-      {product.is_new && <img src={newProduct} alt='New' href={`/products/${product.id}`}/>}
+      {product.is_new ? <img src={newProduct} alt='New' />: <img src={onePixel} alt="Hidden"/>}
       <img src={product.image} alt={product.name} />
       <p>
         {product.category}

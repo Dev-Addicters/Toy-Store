@@ -15,7 +15,6 @@ body {
   background-color: blanchedalmond;
 }
 
-
 a:link {
   text-decoration: none;
 }
@@ -178,6 +177,10 @@ div.tabs > a:hover > div {
   text-align: center;
 }
 
+.productContainer a,
+.productContainer a:visited {
+  color: black;
+}
 
 #root {
   width: 100vw;

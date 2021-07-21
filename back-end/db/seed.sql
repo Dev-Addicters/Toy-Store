@@ -1,5 +1,5 @@
 INSERT INTO inv_products 
-(name, price, image, category, isNEW) 
+(name, price, image, category, is_new) 
 VALUES
 ('Venomized Kingpin-Venom', '15.00', 'https://cdn.shopify.com/s/files/1/1052/2158/products/56557_Marvel_VenomKingPin_POP_GLAM-1-Web_600x2000.png?v=1625785831', 'Marvel', true),
 ('Loki', '11.00', 'https://cdn.shopify.com/s/files/1/1052/2158/products/55741_Marvel_Loki_POP_GLAM-WEB_700x2000.png?v=1623085673', 'Marvel', true),

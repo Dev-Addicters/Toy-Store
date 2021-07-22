@@ -209,10 +209,6 @@ div.tabs > a:hover > div {
     font-size: 4em;
     transform: translateY(-14px);
   }
-  .homeimg {
-    width: 80%;
-    margin-left: 50px;
-  }
   .hidden-visually {
     position: absolute;
     width: 1px;

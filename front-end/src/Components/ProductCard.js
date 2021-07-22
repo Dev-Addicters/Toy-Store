@@ -2,7 +2,8 @@ import React from 'react'
 import newProduct from './images/new.png'
 import onePixel from './images/1px.png'
 
-export default function ProductCard ({ product, addToCart}) {
+
+export default function ProductCard ({ product, addToCart, }) {
 
   return (
     <div className='productCard'>
@@ -15,6 +16,7 @@ export default function ProductCard ({ product, addToCart}) {
         <br />$ {product.price}
       </p>
       <button onClick={()=>addToCart(product.id)} >Add to Cart</button>
+      
     </div>
   )
 }

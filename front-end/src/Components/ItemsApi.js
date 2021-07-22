@@ -11,15 +11,15 @@ function ItemsApi() {
     let {id} = useParams()
     let history = useHistory()
 
-    useEffect(() => {
-        axios.get (`${API}/products/${id}`).then((res)=>{
-            const {data} =res
-            setProduct(data)
-        }).catch((e)=>{
-            history.push('/not-found')
-        })
+    // useEffect(() => {
+    //     axios.get (`${API}/products/${id}`).then((res)=>{
+    //         const {data} =res
+    //         setProduct(data)
+    //     }).catch((e)=>{
+    //         history.push('/not-found')
+    //     })
         
-    }, )
+    // }, )
     return (
         <div>
             <h1>ItemsApi</h1>

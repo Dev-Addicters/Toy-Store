@@ -63,10 +63,11 @@ const deleteProducts = async (ids) => {
         if (!ids.includes(","))
             return await db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", ids);
 
-        return await db.tx(t => {
-            const queries = ids.split(",").map(id => db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", id));
-            return t.batch(queries);
-        })
+        return await db.any(`DELETE FROM inv_products WHERE id IN (${ids}) RETURNING *`);
+        // return await db.tx(t => {
+        //     const queries = ids.split(",").map(id => db.one("DELETE FROM inv_products WHERE id=$1 RETURNING *", id));
+        //     return t.batch(queries);
+        // })
     } catch (err) {
         return "error";
     }

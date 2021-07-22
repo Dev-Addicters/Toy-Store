@@ -58,13 +58,13 @@ const postCheck = (req, res, next) => {
 
     if (!req.body.length) {
         const result = verifyProduct(req.body);
-        return result.pass ? next() : res.json({ error: result.error });
+        return result.pass ? next() : res.status(400).json({ error: result.error });
     }
 
     for (let i = 0; i < req.body.length; i++) {
         const result = verifyProduct(req.body[i]);
         if (!result.pass)
-            return res.json({ error: result.error, index: i });
+            return res.status(400).json({ error: result.error, index: i });
     }
 
     next();
@@ -123,16 +123,16 @@ const putCheck = (req, res, next) => {
     const { ids } = req.params;
     if (!ids.includes(",") && !req.body.length) {
         const result = verifyProduct(req.body);
-        return result.pass ? next() : res.json({ error: result.error });
+        return result.pass ? next() : res.status(400).json({ error: result.error });
     }
 
     if (ids.split(",").length !== req.body.length)
-        return res.json({ error: "Number of ids does not match number of inputs." });
+        return res.status(400).json({ error: "Number of ids does not match number of inputs." });
 
     for (let i = 0; i < req.body.length; i++) {
         const result = verifyProduct(req.body[i]);
         if (!result.pass)
-            return res.json({ error: result.error, index: i });
+            return res.status(400).json({ error: result.error, index: i });
     }
 
     next();

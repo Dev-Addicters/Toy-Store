@@ -26,9 +26,9 @@ products.get("/:ids", async (req, res) => {
     if (catchError(items))
       throw msgInvalidQuery();
 
-    res.json(items.length ? items : [items]);
+    res.json(items);
   } catch (err) {
-    res.status(404).json({ error: err });
+    res.status(400).json({ error: err });
   }
 });
 
@@ -38,9 +38,9 @@ products.post("/", postCheck, async (req, res) => {
     if (catchError(newItems))
       throw msgInvalidQuery();
 
-    res.json(newItems.length ? newItems : [newItems]);
+    res.json(newItems);
   } catch (err) {
-    res.status(404).json({ error: err });
+    res.status(400).json({ error: err });
   }
 });
 
@@ -51,9 +51,9 @@ products.put("/:ids", putCheck, async (req, res) => {
     if (catchError(updatedItems))
       throw msgInvalidQuery();
 
-    res.json(updatedItems.length ? updatedItems : [updatedItems]);
+    res.json(updatedItems);
   } catch (err) {
-    res.status(404).json({ error: err });
+    res.status(400).json({ error: err });
   }
 });
 
@@ -64,9 +64,9 @@ products.delete("/:ids", async (req, res) => {
     if (catchError(deletedItems))
       throw msgInvalidQuery();
 
-    res.json(deletedItems.length ? deletedItems : [deletedItems]);
+    res.json(deletedItems);
   } catch (err) {
-    res.status(404).json({ error: err });
+    res.status(400).json({ error: err });
   }
 });
 

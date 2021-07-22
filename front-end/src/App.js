@@ -77,7 +77,7 @@ export default function App () {
       setCartItems([])
     }
   }
-
+  console.log(products)
   return (
     <Router>
       <NavBar />

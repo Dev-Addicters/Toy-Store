@@ -11,7 +11,7 @@ export default function Cart ({
 }) {
   useEffect(() => {
     getCartList()
-  }, [objectCartItems, getCartList])
+  }, [objectCartItems])
 
   const handleQuantity = (itemID, q) => {
     updateCart(itemID, q)

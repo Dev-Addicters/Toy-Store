@@ -1,6 +1,7 @@
 // DEPENDENCIES
 const cors = require("cors");
 const express = require("express");
+const path = require("path");
 
 // CONFIGURATION
 const app = express();
@@ -13,7 +14,7 @@ app.use(express.json()); // Parse incoming JSON
 
 // ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to toy-store API!");
+  res.sendFile(path.join(__dirname, "/doc.html"));
 });
 
 app.use("/products", productsController);

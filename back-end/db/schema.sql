@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS inv_products;
+DROP TABLE IF EXISTS inv_products CASCADE;
 
 CREATE TABLE inv_products (
     id SERIAL PRIMARY KEY, 
@@ -10,7 +10,7 @@ CREATE TABLE inv_products (
     is_new BOOLEAN
 );
 
-DROP TABLE IF EXISTS item_reviews;
+DROP TABLE IF EXISTS item_reviews CASCADE;
 
 CREATE TABLE item_reviews (
     id SERIAL PRIMARY KEY,

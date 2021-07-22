@@ -7,6 +7,7 @@ CREATE TABLE inv_products (
     image TEXT,
     category TEXT,
     quantity INTEGER,
+    CHECK (quantity >= 0),
     is_new BOOLEAN
 );
 

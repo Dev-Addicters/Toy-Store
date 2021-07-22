@@ -45,8 +45,12 @@ const updateProductsQuery = (ids, data) => {
         return { qString, qParams };
     }
 
-    if (!ids.includes(","))
+    if (!ids.includes(",")) {
+        if (data.length) {
+            data = data[0];
+        }
         return constructQuery(ids, data);
+    }
 
     return ids.split(",").map((id, i) => constructQuery(id, data[i]));
 }

@@ -1,14 +1,32 @@
 import React from 'react'
 import ItemsApi from '../Components/ItemsApi'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
+import { apiURL } from '../util/apiURL.js'
+import { useHistory } from 'react-router-dom'
+import axios from 'axios'
 
-export default function Show( { product }) {
-    const {id} = useParams()
-    const [products]= useState(product[id])
-    return (
-        <div className='productCard'>
-            <ItemsApi products={products} id={id}/>
-       </div>
-    )
+const API = apiURL()
+
+export default function Show () {
+  const { id } = useParams()
+  const history = useHistory()
+  const [productDetails, setProductDetails] = useState({})
+
+  useEffect(() => {
+    axios
+      .get(`${API}/products/${id}`)
+      .then(res => {
+        setProductDetails(res.data)
+      })
+      .catch(e => {
+        history.push('/not-found')
+      })
+  }, [])
+
+  return (
+    <div className='productCard'>
+      <ItemsApi productDetails={productDetails} key={productDetails.name} />
+    </div>
+  )
 }

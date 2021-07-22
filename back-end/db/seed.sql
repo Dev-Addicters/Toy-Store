@@ -53,7 +53,10 @@ VALUES
 INSERT INTO item_reviews
 (product_id, reviewer, title, content, rating)
 VALUES
-('1', 'Hady', 'So Cool!!', 'I just love how Venom and King Pin were merged into one character, such a cool concept!! Would definitely recommend getting one!!!', 5);
+('1', 'Hady', 'So Cool!!', 'I just love how Venom and King Pin were merged into one character, such a cool concept!! Would definitely recommend getting one!!!', 5),
+('1', 'Alexander', 'Great Quality!', 'I love this product, it is a great quality product and I am very happy with it.', 5),
+('1', 'Du Min', 'Definitely Would Recommend.', 'I had issues during delivery and it came damaged. I contacted them and they replaced it right away. I will be ordering again from this awesome company!', 5),
+('2', 'Daniel', 'I could not find this anywhere.', 'I am so glad that I found this. I am a huge Loki fan so I was looking for it for a while. Now I am going to recommend all my friends and family!', 4);
 
 
 

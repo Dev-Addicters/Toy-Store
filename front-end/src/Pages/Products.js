@@ -14,7 +14,7 @@ useEffect(()=>{
   }else{
     getAllProducts()
   }
-}, [category, url])
+}, [category, url, getProductsByCategory, getAllProducts])
 
 
   return (

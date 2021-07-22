@@ -15,27 +15,43 @@ import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-function App () {
+export default function App () {
   const [products, setProducts] = useState([])
-  const [cart, setCart] = useState([])
-  const [ cartItems, setCartItems] = useState([])
+  const [cartItems, setCartItems] = useState([])
+  const [objectCartItems, setObjectCartItems] = useState({})
 
   useEffect(() => {
     getAllProducts()
   }, [])
 
   const addToCart = id => {
-    setCart([...cart].concat(id))
+    let objItems = Object.assign({}, objectCartItems)
+
+    if (!Object.keys(objItems).includes(id.toString())) {
+      objItems[id.toString()] = 0
+    }
+    objItems[id.toString()] += 1
+
+    setObjectCartItems(objItems)
+  }
+
+  const updateCart = (id, quantity) => {
+    let objItems = Object.assign({}, objectCartItems)
+    objItems[id.toString()] += quantity
+    if (objItems[id.toString()] === 0) {
+      delete objItems[id.toString()]
+    }
+    setObjectCartItems(objItems)
   }
 
   const getAllProducts = () => {
     axios
-    .get(`${API}/products`)
-    .then(
-      response => setProducts(response.data),
-      error => console.log('get', error)
-    )
-    .catch(c => console.warn('catch', c))
+      .get(`${API}/products`)
+      .then(
+        response => setProducts(response.data),
+        error => console.log('get', error)
+      )
+      .catch(c => console.warn('catch', c))
   }
   const getProductsByCategory = category => {
     axios
@@ -47,20 +63,19 @@ function App () {
       .catch(c => console.warn('catch', c))
   }
 
-
-
-
   const getCartList = () => {
-    const listItems = cart.join(",")
+    const listItems = Object.keys(objectCartItems).join(',')
     if (listItems) {
-    axios
-    .get(`${API}/products/${listItems}`)
-    .then(
-      response => setCartItems(response.data),
-      error => console.log('get', error)
-    )
-    .catch(c => console.warn('catch', c))
-  }
+      axios
+        .get(`${API}/products/${listItems}`)
+        .then(
+          response => setCartItems(response.data),
+          error => console.log('get', error)
+        )
+        .catch(c => console.warn('catch', c))
+    } else {
+      setCartItems([])
+    }
   }
 
   return (
@@ -72,19 +87,35 @@ function App () {
             <Home />
           </Route>
           <Route exact path='/cart'>
-            <Cart cartItems={cartItems} getCartList={getCartList} addToCart={addToCart} />
+            <Cart
+              cartItems={cartItems}
+              objectCartItems={objectCartItems}
+              getCartList={getCartList}
+              addToCart={addToCart}
+              updateCart={updateCart}
+            />
           </Route>
           <Route exact path='/products/category/:category'>
-          <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>
+            <Products
+              products={products}
+              addToCart={addToCart}
+              getProductsByCategory={getProductsByCategory}
+              getAllProducts={getAllProducts}
+            />
           </Route>
           <Route exact path='/products/new'>
             <New />
           </Route>
           <Route exact path='/products'>
-            <Products products={products} addToCart={addToCart} getProductsByCategory={getProductsByCategory} getAllProducts={getAllProducts}/>
+            <Products
+              products={products}
+              addToCart={addToCart}
+              getProductsByCategory={getProductsByCategory}
+              getAllProducts={getAllProducts}
+            />
           </Route>
           <Route exact path='/products/:id'>
-            <Show product={products}/>
+            <Show product={products} />
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit />
@@ -98,11 +129,3 @@ function App () {
     </Router>
   )
 }
-
-export default App
-
-// <ul>
-// {days.map((day) => (
-//  <li key={day.name}>{day.name}</li>
-// ))}
-// </ul>

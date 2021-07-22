@@ -4,10 +4,6 @@ import onePixel from './images/1px.png'
 
 export default function ProductCard ({ product, addToCart}) {
 
-  // const handleAddToCart = (e) => {
-  //   addToCart(product.id)
-  // }
-
   return (
     <div className='productCard'>
       {product.is_new ? <img src={newProduct} alt='New' />: <img src={onePixel} alt="Hidden"/>}

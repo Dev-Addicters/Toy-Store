@@ -6,6 +6,7 @@ CREATE TABLE inv_products (
     price DECIMAL(10,2),
     image TEXT,
     category TEXT,
+    quantity INTEGER,
     is_new BOOLEAN
 );
 

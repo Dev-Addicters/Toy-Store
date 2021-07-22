@@ -17,7 +17,7 @@ export default function ProductCard ({ product }) {
         <b>{product.name}</b>
         <br />$ {product.price}
       </p>
-      <Link to={`/`}><button>Add to Cart</button></Link>
+     <button>Add to Cart</button>
     </div>
   )
 }

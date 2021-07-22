@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 // import ProductCard from '../Components/ProductCard'
 import DeleteIcon from '@material-ui/icons/Delete'
+import CartTable from '../Components/CartTable'
 
 export default function Cart ({
   cartItems,
@@ -19,6 +20,14 @@ export default function Cart ({
 
   return (
     <div className='repeatAutoMinMax'>
+
+    <CartTable  
+      cartItems={cartItems}
+      objectCartItems={objectCartItems}
+      getCartList={getCartList}
+      addToCart={addToCart}
+      updateCart={updateCart}
+        />
       {/* {cartItems &&
         cartItems.map(item => {
           return (
@@ -26,7 +35,7 @@ export default function Cart ({
           )
         })} */}
 
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <th>ITEM</th>
@@ -76,7 +85,7 @@ export default function Cart ({
               )
             })}
         </tbody>
-      </table>
+      </table> */}
     </div>
   )
 }

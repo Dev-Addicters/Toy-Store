@@ -10,14 +10,41 @@ import Products from './Pages/Products'
 import New from './Pages/New'
 import Show from './Pages/Show'
 import Edit from './Pages/Edit'
+import Cart from './Pages/Cart'
 import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-function App () {
+export default function App () {
   const [products, setProducts] = useState([])
+  const [cartItems, setCartItems] = useState([])
+  const [objectCartItems, setObjectCartItems] = useState({})
 
   useEffect(() => {
+    getAllProducts()
+  }, [])
+
+  const addToCart = id => {
+    let objItems = Object.assign({}, objectCartItems)
+
+    if (!Object.keys(objItems).includes(id.toString())) {
+      objItems[id.toString()] = 0
+    }
+    objItems[id.toString()] += 1
+
+    setObjectCartItems(objItems)
+  }
+
+  const updateCart = (id, quantity) => {
+    let objItems = Object.assign({}, objectCartItems)
+    objItems[id.toString()] += quantity
+    if (objItems[id.toString()] === 0) {
+      delete objItems[id.toString()]
+    }
+    setObjectCartItems(objItems)
+  }
+
+  const getAllProducts = () => {
     axios
       .get(`${API}/products`)
       .then(
@@ -25,8 +52,32 @@ function App () {
         error => console.log('get', error)
       )
       .catch(c => console.warn('catch', c))
-  }, [])
+  }
+  const getProductsByCategory = category => {
+    axios
+      .get(`${API}/products?category=${category}`)
+      .then(
+        response => setProducts(response.data),
+        error => console.log('get', error)
+      )
+      .catch(c => console.warn('catch', c))
+  }
 
+  const getCartList = () => {
+    const listItems = Object.keys(objectCartItems).join(',')
+    if (listItems) {
+      axios
+        .get(`${API}/products/${listItems}`)
+        .then(
+          response => setCartItems(response.data),
+          error => console.log('get', error)
+        )
+        .catch(c => console.warn('catch', c))
+    } else {
+      setCartItems([])
+    }
+  }
+  console.log(products)
   return (
     <Router>
       <NavBar />
@@ -35,11 +86,33 @@ function App () {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route exact path='/products'>
-            <Products products={products} />
+          <Route exact path='/cart'>
+            <Cart
+              cartItems={cartItems}
+              objectCartItems={objectCartItems}
+              getCartList={getCartList}
+              addToCart={addToCart}
+              updateCart={updateCart}
+            />
+          </Route>
+          <Route exact path='/products/category/:category'>
+            <Products
+              products={products}
+              addToCart={addToCart}
+              getProductsByCategory={getProductsByCategory}
+              getAllProducts={getAllProducts}
+            />
           </Route>
           <Route exact path='/products/new'>
             <New />
+          </Route>
+          <Route exact path='/products'>
+            <Products
+              products={products}
+              addToCart={addToCart}
+              getProductsByCategory={getProductsByCategory}
+              getAllProducts={getAllProducts}
+            />
           </Route>
           <Route exact path='/products/:id'>
             <Show product={products}/>
@@ -56,11 +129,3 @@ function App () {
     </Router>
   )
 }
-
-export default App
-
-// <ul>
-// {days.map((day) => (
-//  <li key={day.name}>{day.name}</li>
-// ))}
-// </ul>

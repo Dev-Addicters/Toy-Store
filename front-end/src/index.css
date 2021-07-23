@@ -64,6 +64,10 @@ div.tabs > a:hover > div {
   z-index: 999;
 }
 
+main {
+  background-color: blanchedalmond;
+  height: fit-content;
+}
 .four0four {
   width: 100vw;
   height: 100%;
@@ -157,7 +161,9 @@ div.tabs > a:hover > div {
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   margin: 2vw 4vw 2vw 4vw;
+  padding: 0px 0px 22px 0px;
   overflow: scroll;
+  background-color: blanchedalmond;
 }
 
 .productCard {
@@ -186,52 +192,62 @@ div.tabs > a:hover > div {
   text-align: center;
 }
 
+.productCard a {
+  text-decoration: none;
+  color: black;
+}
+
 .productContainer a,
 .productContainer a:visited {
   color: black;
 }
-.ProductDeat{
+.ProductDeat {
   margin-left: 15px;
 }
-.forminput{
- display: flex;
- flex-direction: column;
- border-radius: 10px;
- border: 1px solid black;
- background-color: aliceblue;
- gap: 10px;
- width: 500px;
- height: 200px;
- margin-left: 300px;
- padding: 15px;
+.forminput {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: aliceblue;
+  gap: 10px;
+  width: 500px;
+  height: 200px;
+  margin-left: 300px;
+  padding: 15px;
 }
-.forminput input{
+.forminput input {
   width: 400px;
   font-size: 18px;
 }
-.forminput button{
+.forminput button {
   width: 150px;
   font-size: 20px;
   text-align: center;
   margin: auto;
 }
-.imgedit{
+.imgedit {
   float: right;
   margin-top: -350px;
 }
-.productshowB{
- font-size: 25px;
+.productshowB {
+  font-size: 25px;
 }
-.Details{
+.Details {
   float: right;
   margin-top: -450px;
   margin-right: 400px;
 }
-.garabe{
+.garabe {
   display: flex;
   flex-direction: row-reverse;
   margin-right: 40px;
-
+}
+.MuiTableContainer-root {
+  height: 100%;
+}
+.MuiTableContainer-root table {
+  flex-shrink: inherit;
 }
 
 #root {
@@ -286,11 +302,11 @@ div.tabs > a:hover > div {
   .MuiTableContainer-root {
     max-height: 89vh;
   }
-  .MuiTableContainer-root table{
+  .MuiTableContainer-root table {
     flex-shrink: inherit;
   }
 
-    /* .MuiContainer-root {
+  /* .MuiContainer-root {
       max-height: 70vh;
   } */
 
@@ -347,6 +363,5 @@ div.tabs > a:hover > div {
   } */
   #searchIcon {
     display: none;
-  
-}
+  }
 }

@@ -23,7 +23,7 @@ export default function AlertDialog () {
   return (
     <div style={{ display: 'grid', placeItems: 'center' }}>
       <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-        Click me
+        START SHOPPING
       </Button>
       <Dialog
         open={open}

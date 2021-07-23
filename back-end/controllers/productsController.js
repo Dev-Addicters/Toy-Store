@@ -16,7 +16,7 @@ products.use("/:productId/itemReviews", itemReviewsController);
 
 products.get("/", async (req, res) => {
   const allItems = await getAllProducts(req.query);
-  res.json(allItems);
+  res.json(allItems.length ? allItems : [allItems]);
 });
 
 products.get("/:ids", async (req, res) => {
@@ -26,7 +26,7 @@ products.get("/:ids", async (req, res) => {
     if (catchError(items))
       throw msgInvalidQuery();
 
-    res.json(items);
+    res.json(items.length ? items : [items]);
   } catch (err) {
     res.status(400).json({ error: err });
   }
@@ -38,7 +38,7 @@ products.post("/", postCheck, async (req, res) => {
     if (catchError(newItems))
       throw msgInvalidQuery();
 
-    res.json(newItems);
+    res.json(newItems.length ? newItems : [newItems]);
   } catch (err) {
     res.status(400).json({ error: err });
   }
@@ -51,7 +51,7 @@ products.put("/:ids", putCheck, async (req, res) => {
     if (catchError(updatedItems))
       throw msgInvalidQuery();
 
-    res.json(updatedItems);
+    res.json(updatedItems.length ? updatedItems : [updatedItems]);
   } catch (err) {
     res.status(400).json({ error: err });
   }
@@ -64,7 +64,7 @@ products.delete("/:ids", async (req, res) => {
     if (catchError(deletedItems))
       throw msgInvalidQuery();
 
-    res.json(deletedItems);
+    res.json(deletedItems.length ? deletedItems : [deletedItems]);
   } catch (err) {
     res.status(400).json({ error: err });
   }

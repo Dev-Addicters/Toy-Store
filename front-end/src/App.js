@@ -99,10 +99,8 @@ export default function App() {
     for (const id in objectCartItems) {
       buyItems.push({ id, quantity: -objectCartItems[id] });
     }
-    console.log(buyItems)
     try {
       const res = await axios.put(`${API}/products/${buyItems.map(item => item.id).join(",")}`, buyItems)
-
       setObjectCartItems({});
       toast.success('Thank you for your order!');
     } catch (e) {

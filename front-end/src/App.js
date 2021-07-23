@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { apiURL } from './util/apiURL.js'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 import NavBar from './Components/NavBar'
@@ -16,11 +18,11 @@ import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-export default function App () {
+export default function App() {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
-  const [ alert, setAlert ] = useState(null)
+  const [alert, setAlert] = useState(null)
 
   useEffect(() => {
     getAllProducts()
@@ -37,15 +39,15 @@ export default function App () {
     setObjectCartItems(objItems)
   }
 
-  const addNewCard = (newCard)=>{
-    axios.get(`${API}/products`, newCard).then((res)=>{
+  const addNewCard = (newCard) => {
+    axios.get(`${API}/products`, newCard).then((res) => {
       return axios.get(`${API}/products`)
-    }).then((res)=>{
+    }).then((res) => {
       setProducts(res.data)
     })
-    .catch((e)=>{
-      console.log(e)
-    })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   const updateCart = (id, quantity) => {
@@ -92,15 +94,23 @@ export default function App () {
   }
 
 
-  const buyProducts = () => {
-    setCartItems([])
-    setObjectCartItems({})
-    setProducts([])
-    getAllProducts()
+  const buyProducts = async () => {
+    const buyItems = [];
+    for (const id in objectCartItems) {
+      buyItems.push({ id, quantity: -objectCartItems[id] });
+    }
+    try {
+      const res = await axios.put(`${API}/products/${buyItems.map(item => item.id).join(",")}`, buyItems)
+      setObjectCartItems({});
+      toast.success('Thank you for your order!');
+    } catch (e) {
+      toast.error("Something went wrong.");
+    }
   }
 
   return (
     <Router>
+      <ToastContainer></ToastContainer>
       <NavBar objectCartItems={objectCartItems} />
       <main>
         {alert}
@@ -127,7 +137,7 @@ export default function App () {
             />
           </Route>
           <Route exact path='/products/new'>
-            <New  addNewCard={addNewCard}/>
+            <New addNewCard={addNewCard} />
           </Route>
           <Route exact path='/products'>
             <Products
@@ -138,7 +148,7 @@ export default function App () {
             />
           </Route>
           <Route exact path='/products/:id'>
-            <Show product={products} addToCart={addToCart}/>
+            <Show product={products} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit />

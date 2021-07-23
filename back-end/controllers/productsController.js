@@ -16,7 +16,7 @@ products.use("/:productId/itemReviews", itemReviewsController);
 
 products.get("/", async (req, res) => {
   const allItems = await getAllProducts(req.query);
-  res.json(allItems.length ? allItems : [allItems]);
+  res.json(allItems);
 });
 
 products.get("/:ids", async (req, res) => {

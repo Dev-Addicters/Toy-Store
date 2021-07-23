@@ -115,7 +115,7 @@ export default function App () {
             />
           </Route>
           <Route exact path='/products/:id'>
-            <Show product={products}/>
+            <Show product={products} addToCart={addToCart}/>
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit />

@@ -1,10 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
-
 @font-face {
   font-family: GreatVictorian;
   src: url("./GreatVictorian.otf") format("opentype");
 }
-
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -14,11 +12,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: blanchedalmond;
 }
-
 a:link {
   text-decoration: none;
 }
-
 a:visited {
   color: azure;
 }
@@ -27,23 +23,19 @@ h1 {
   font-weight: 400;
   font-size: 3.5em;
 }
-
 div.tabs {
   position: relative;
   font-size: 0;
 }
-
 div.tabs > a {
   display: inline-block;
   padding: 0.5em;
   font-size: 16px;
   line-height: 1em;
 }
-
 div.tabs > a + a {
   margin-left: 0.5em;
 }
-
 div.tabs > a > div {
   position: absolute;
   top: 100%;
@@ -57,13 +49,11 @@ div.tabs > a > div {
   justify-content: space-evenly;
   align-items: center;
 }
-
 div.tabs > a:hover > div {
   display: flex;
   box-shadow: 0 5px 15px -4px rgba(0, 0, 0, 0.3);
   z-index: 999;
 }
-
 .four0four {
   width: 100vw;
   height: 100%;
@@ -78,7 +68,6 @@ div.tabs > a:hover > div {
   z-index: -1;
   position: relative;
 }
-
 .navBar,
 .footer {
   display: flex;
@@ -97,11 +86,9 @@ div.tabs > a:hover > div {
   visibility: visible;
   box-shadow: 0 12px 6.1px rgba(0, 0, 0, 0.07), 0 21px 51px rgba(0, 0, 0, 0.028);
 }
-
 .footer {
   visibility: hidden;
 }
-
 .store {
   color: azure;
 }
@@ -116,7 +103,6 @@ div.tabs > a:hover > div {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
-
 .navInput {
   margin-top: 40px;
   width: 300px;
@@ -124,18 +110,15 @@ div.tabs > a:hover > div {
   border-radius: 30px;
   padding: 8px 0px 0px 20px;
 }
-
 .navProfile,
 .navCar {
   margin-top: 40px;
 }
-
 .navButton {
   margin-top: 44px;
   font-size: 18px;
   border-radius: 10px;
 }
-
 .headContainer {
   display: flex;
   flex-direction: row;
@@ -146,11 +129,9 @@ div.tabs > a:hover > div {
   width: 160px;
   height: 89px;
 }
-
 .productImage:hover {
   transform: translateY(6px);
 }
-
 .repeatAutoMinMax {
   height: 100%;
   display: grid;
@@ -159,7 +140,6 @@ div.tabs > a:hover > div {
   margin: 2vw 4vw 2vw 4vw;
   overflow: scroll;
 }
-
 .productCard {
   width: 350px;
   height: 520px;
@@ -176,7 +156,6 @@ div.tabs > a:hover > div {
   height: 55px;
   transform: translateY(-24px);
 }
-
 .productCard img {
   width: 300px;
   height: 260px;
@@ -185,15 +164,27 @@ div.tabs > a:hover > div {
   font-size: 18px;
   text-align: center;
 }
-
+.productCard a{
+  text-decoration: none;
+  color: black
+}
+.productCard a:hover{
+  transition: all 1.3s;
+  font-size: 22px;
+  color: red;
+}
 .productContainer a,
 .productContainer a:visited {
   color: black;
+}
+.Details button{
+  font-size: 20px;
 }
 .ProductDeat{
   margin-left: 15px;
 }
 .forminput{
+  margin-top: 50px;
  display: flex;
  flex-direction: column;
  border-radius: 10px;
@@ -205,6 +196,24 @@ div.tabs > a:hover > div {
  margin-left: 300px;
  padding: 15px;
 }
+.newimgap{
+  margin-left: 320px;
+}
+
+.productCardnew{
+  float: right;
+  width: 550px;
+  height: 720px;
+  margin-top: -250px;
+  margin-right: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: aliceblue;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.9);
+}
 .forminput input{
   width: 400px;
   font-size: 18px;
@@ -212,8 +221,10 @@ div.tabs > a:hover > div {
 .forminput button{
   width: 150px;
   font-size: 20px;
-  text-align: center;
-  margin: auto;
+}
+.buttonupt{
+  margin-top: 20px;
+  margin-left: 170px;
 }
 .imgedit{
   float: right;
@@ -230,10 +241,11 @@ div.tabs > a:hover > div {
 .garabe{
   display: flex;
   flex-direction: row-reverse;
-  margin-right: 40px;
-
+  margin-right: 130px;
 }
-
+.h1product{
+  text-align: center;
+}
 #root {
   width: 100vw;
   height: 100vh;
@@ -242,11 +254,9 @@ div.tabs > a:hover > div {
   margin: 0;
   padding: 0;
 }
-
 #searchIcon {
   transform: translateY(8px);
 }
-
 @media screen and (max-width: 1100px) {
   h1 {
     font-size: 4em;
@@ -262,11 +272,9 @@ div.tabs > a:hover > div {
     overflow: hidden;
     clip: rect(0 0 0 0);
   }
-
   .navLink h3 {
     visibility: hidden;
   }
-
   .footer {
     height: auto;
     visibility: visible;
@@ -278,27 +286,22 @@ div.tabs > a:hover > div {
     font-size: 2em;
     color: azure;
   }
-
   .four0four {
     height: 75vh;
   }
-
   .MuiTableContainer-root {
     max-height: 89vh;
   }
   .MuiTableContainer-root table{
     flex-shrink: inherit;
   }
-
     /* .MuiContainer-root {
       max-height: 70vh;
   } */
-
   #searchIcon {
     display: none;
   }
 }
-
 @media screen and (max-width: 380px) {
   main {
     height: 66vh;
@@ -306,7 +309,6 @@ div.tabs > a:hover > div {
   h1 {
     transform: translateY(14px);
   }
-
   .navBar {
     height: auto;
     display: grid;
@@ -314,13 +316,11 @@ div.tabs > a:hover > div {
     place-items: center;
     gap: 15px;
   }
-
   .navInput {
     align-self: center;
     width: auto;
     margin: 0;
   }
-
   .navBar a:nth-child(1) {
     display: flex;
   }
@@ -331,7 +331,6 @@ div.tabs > a:hover > div {
   .navBar form {
     width: 100%;
   }
-
   .footer {
     transform: translateY(11px);
   }
@@ -347,6 +346,5 @@ div.tabs > a:hover > div {
   } */
   #searchIcon {
     display: none;
-  
 }
 }

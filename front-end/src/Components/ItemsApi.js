@@ -2,25 +2,25 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { Link, useHistory, useParams, withRouter } from 'react-router-dom'
 import axios from "axios"
-import {apiURL} from "../util/apiURL"
+// import {apiURL} from "../util/apiURL"
 
-const API = apiURL() 
+// const API = apiURL() 
 
 function ItemsApi (props) {
+ const {products, id} = props
+//  const [products, setProducts] = useState([])
+//  let { id } = useParams()
+//  let history = useHistory()
 
- const [products, setProducts] = useState([])
- let { id } = useParams()
- let history = useHistory()
-
- useEffect(()=>{
-     axios.get(`${API}/products/${id}`).then((res)=>{
-         const {data} = res
-         setProducts(data)
+//  useEffect(()=>{
+//      axios.get(`${API}/products/${id}`).then((res)=>{
+//          const {data} = res
+//          setProducts(data)
        
-     }).catch((e)=>{
-                 history.push('/not-found')
-             })
- }, [id, history])
+//      }).catch((e)=>{
+//                  history.push('/not-found')
+//              })
+//  }, [id, history])
   return (
     <div className="ProductDeat">
       <h1>{products.name}</h1>

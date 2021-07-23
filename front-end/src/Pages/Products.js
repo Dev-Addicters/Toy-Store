@@ -20,7 +20,7 @@ useEffect(()=>{
   return (
     <div className='repeatAutoMinMax'>
       {products.map((product, id )=> {
-        return <ProductCard products={products} key={product.id} id={product.id} addToCart={addToCart}/>
+        return <ProductCard products={product} key={product.id} id={product.id} addToCart={addToCart}/>
       })}
     </div>
   )

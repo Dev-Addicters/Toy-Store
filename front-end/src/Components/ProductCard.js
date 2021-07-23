@@ -8,17 +8,16 @@ export default function ProductCard ({ products, addToCart, id}) {
 
   return (
     <div className='productCard'>
-      <Link to={`/products/${id}`}>
+      
           {products.is_new ? <img src={newProduct } alt='New' />: <img src={onePixel} alt="Hidden"/>}
-          <img src={products.image} alt={products.name} />
+          <img src={products.image} alt={products.name} /> 
           <p>
             {products.category}
             <br />
-            <b>{products.name}</b>
+            <Link to={`/products/${id}`}>  <b>{products.name}</b></Link>
             <br />$ {products.price}
           </p>
           <button onClick={()=>addToCart(products.id)} >Add to Cart</button>
-      </Link>
     </div>
   )
 }

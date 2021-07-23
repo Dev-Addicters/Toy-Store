@@ -191,9 +191,7 @@ main {
 .Details button{
   font-size: 20px;
 }
-.ProductDeat{
-  margin-left: 15px;
-}
+
 .forminput{
   margin-top: 50px;
  display: flex;
@@ -246,19 +244,17 @@ main {
   float: right;
   margin-top: -350px;
 }
-.productshowB {
-  font-size: 25px;
+
+.productshowB:hover{
+  background: '#1b5e20'
 }
-.Details {
-  float: right;
-  margin-top: -450px;
-  margin-right: 400px;
-}
+
 .garabe {
   display: flex;
   flex-direction: row-reverse;
   margin-right: 40px;
 }
+
 .MuiTableContainer-root {
   height: 100%;
 }
@@ -266,9 +262,44 @@ main {
   flex-shrink: inherit;
   margin-right: 130px;
 }
-.h1product{
-  text-align: center;
+
+.showGrid{
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr minmax(40px, 60px);
+  overflow: scroll;
 }
+
+.showGridDiv2{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-rows: minmax(10%,15%) 1fr 1fr;
+  /* overflow: scroll; */
+}
+
+.shGriDv2-TwoDivs{
+  width: 100%;
+  height: auto;
+  display: grid;
+  grid-template-columns: minmax(20%, 35%) 1fr;
+}
+.shGriDv2-TwoDivs img{
+  width: 100%;
+  height: 100%;
+  margin: 2% 4%
+}
+.itemDetails, .textDetails{
+  width: 100%;
+  height: 100%;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
 #root {
   width: 100vw;
   height: 100vh;
@@ -319,6 +350,11 @@ main {
     flex-shrink: inherit;
   }
 
+  .showGrid{
+    width: 100vw;
+    height: 72vh;
+  }
+
   #searchIcon {
     display: none;
   }
@@ -361,6 +397,32 @@ main {
   }
   .MuiTableContainer-root {
     height: 40vh;
+  }
+
+  .showGridDiv2{
+    width: 100%;
+    height: 100%;
+  }
+
+  .shGriDv2-TwoDivs{
+    width: 100%;
+    height: auto;
+    margin: 1% 0 1% 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .shGriDv2-TwoDivs img{
+    height: 50%;
+    margin:0;
+  }
+
+
+
+  #root > main > div > div.showGridDiv2 > div.shGriDv2-TwoDivs > div > div.makeStyles-buttonsDiv-4 > a > span.MuiButton-label > h2{
+    font-size: 0.75em;
+  }
+  #root > main > div > div.showGridDiv2 > div.shGriDv2-TwoDivs > div > div.makeStyles-buttonsDiv-4 > button > span.MuiButton-label > h2{
+    font-size: 0.75em;
   }
   #searchIcon {
     display: none;

@@ -221,8 +221,10 @@ div.tabs > a:hover > div {
 .forminput button{
   width: 150px;
   font-size: 20px;
-  text-align: center;
-  margin: auto;
+}
+.buttonupt{
+  margin-top: 20px;
+  margin-left: 170px;
 }
 .imgedit{
   float: right;

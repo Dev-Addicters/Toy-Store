@@ -32,7 +32,7 @@ export default function EditItems(props) {
                 <label>Category: <input type="text" placeholder={products.category}></input></label>
                 <label>Product: <input type="text" placeholder={products.name}></input></label>
                 <label>Prices: <input type="number" placeholder={ "$" + products.price}></input></label>
-                <button>Update</button>
+               <Link to={`/products/${id}`}><button className="buttonupt">Update</button></Link> 
             </form>
             </div>
             

@@ -15,7 +15,7 @@ export default function NewItems() {
                     <label>Category: <input type="text" placeholder={" "}></input></label>
                     <label>Product: <input type="text" placeholder={" "}></input></label>
                     <label>Prices: <input type="number" placeholder={" "}></input></label>
-                    <button>New</button>
+                    <button className="buttonupt">New</button>
                 </form>
             </div>
               <img src={newProduct} alt={""} style={{width: "500px"}} className="newimgap" />

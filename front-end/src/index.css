@@ -192,14 +192,17 @@ div.tabs > a:hover > div {
  background-color: aliceblue;
  gap: 10px;
  width: 500px;
- height: 200px;
+ height: 300px;
  margin-left: 300px;
  padding: 15px;
 }
 .newimgap{
   margin-left: 320px;
 }
-
+.imgnewPro{
+  width: 300px;
+  height: 350px;
+}
 .productCardnew{
   float: right;
   width: 550px;

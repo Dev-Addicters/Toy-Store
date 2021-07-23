@@ -37,6 +37,17 @@ export default function App () {
     setObjectCartItems(objItems)
   }
 
+  const addNewCard = (newCard)=>{
+    axios.get(`${API}/products`, newCard).then((res)=>{
+      return axios.get(`${API}/products`)
+    }).then((res)=>{
+      setProducts(res.data)
+    })
+    .catch((e)=>{
+      console.log(e)
+    })
+  }
+
   const updateCart = (id, quantity) => {
     let objItems = Object.assign({}, objectCartItems)
     objItems[id.toString()] += quantity
@@ -116,7 +127,7 @@ export default function App () {
             />
           </Route>
           <Route exact path='/products/new'>
-            <New />
+            <New  addNewCard={addNewCard}/>
           </Route>
           <Route exact path='/products'>
             <Products

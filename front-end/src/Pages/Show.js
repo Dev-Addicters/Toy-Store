@@ -10,7 +10,7 @@ import axios from 'axios'
 
 const API = apiURL()
 
-export default function Show (product) {
+export default function Show ({product, addToCart}) {
   let { id } = useParams()
   const [products, setProducts] = useState({})
   console.log(products, "hello")
@@ -34,7 +34,7 @@ export default function Show (product) {
       <div>
         <Link to={`/products`}><button className="productshowB">Back</button></Link>
       </div>
-      <ItemsApi products={products} id={id} />
+      <ItemsApi products={products} id={id} addToCart={addToCart} />
       <Link to={`/products`} className="garabe"><img src={newPhoto} alt="garabe"/></Link>
     </div>
   )

@@ -1,30 +1,39 @@
 import React from 'react'
-import { Link, useHistory, withRouter } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useHistory, useParams, withRouter } from 'react-router-dom'
+import axios from "axios"
+// import {apiURL} from "../util/apiURL"
 
-function ItemsApi ({ productDetails }) {
-  let history = useHistory()
-  const product = Object.assign({}, ...productDetails)
+// const API = apiURL() 
 
+function ItemsApi (props) {
+ const {products, id} = props
+//  const [products, setProducts] = useState([])
+//  let { id } = useParams()
+//  let history = useHistory()
+
+//  useEffect(()=>{
+//      axios.get(`${API}/products/${id}`).then((res)=>{
+//          const {data} = res
+//          setProducts(data)
+       
+//      }).catch((e)=>{
+//                  history.push('/not-found')
+//              })
+//  }, [id, history])
   return (
-    <div>
-      <h1>{product.name}</h1>
+    <div className="ProductDeat">
+      <h1>{products.name}</h1>
       <div>
-        <img src={product.image} alt={product.name} />
+        <img src={products.image} alt={products.name} />
+      </div>
+      <div className="Details">
         <p>
-          <label>Category : {product.category} </label>
-          <br />
-          <label>
-            Product name: <b>{product.name}</b>
-          </label>
-          <label>
-            Product Price: <br />$ {product.price}
-          </label>
+            <h2> Category : {products.category} </h2>
+            <h2> Product name: {products.name}</h2>
+            <h2> Product Price: $ {products.price}</h2>
         </p>
-        <button>Edit Product</button>
-        <button>Delete</button>
-        <Link to={`/products`}>
-          <button>Back</button>
-        </Link>
+        <Link to={`/products/${id}/edit`}><button products={products} >Edit Product</button></Link>
       </div>
     </div>
   )

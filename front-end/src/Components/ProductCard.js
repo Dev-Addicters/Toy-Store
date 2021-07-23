@@ -1,20 +1,23 @@
 import React from 'react'
 import newProduct from './images/new.png'
 import onePixel from './images/1px.png'
+import { Link } from 'react-router-dom'
 
-export default function ProductCard ({ product, addToCart}) {
+
+export default function ProductCard ({ products, addToCart, id}) {
 
   return (
     <div className='productCard'>
-      {product.is_new ? <img src={newProduct} alt='New' />: <img src={onePixel} alt="Hidden"/>}
-      <img src={product.image} alt={product.name} />
-      <p>
-        {product.category}
-        <br />
-        <b>{product.name}</b>
-        <br />$ {product.price}
-      </p>
-      <button onClick={()=>addToCart(product.id)} >Add to Cart</button>
+      
+          {products.is_new ? <img src={newProduct } alt='New' />: <img src={onePixel} alt="Hidden"/>}
+          <img src={products.image} alt={products.name} /> 
+          <p>
+            {products.category}
+            <br />
+            <Link to={`/products/${id}`}>  <b>{products.name}</b></Link>
+            <br />$ {products.price}
+          </p>
+          <button onClick={()=>addToCart(products.id)} >Add to Cart</button>
     </div>
   )
 }

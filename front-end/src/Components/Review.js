@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ReviewsForm from './ReviewsForm';
 
-export default function Review({ review, updateReview }) {
+export default function Review({ review, updateReview, deleteReview }) {
     const [editReview, setEditReview] = useState(false);
     return (
         <div>{editReview ? <ReviewsForm newForm={false} editReview={editReview} setEditReview={setEditReview} updateReview={updateReview} reviewDetails={review} /> : (
@@ -14,7 +14,7 @@ export default function Review({ review, updateReview }) {
             </div>
         )}
             <button onClick={() => setEditReview(!editReview)}>{editReview ? "Cancel" : "Edit this review"}</button>
-            {/* <button onClick={() => props.handleDelete(review.id)}>delete</button> */}
+            <button onClick={() => deleteReview(review.id)}>Delete</button>
         </div>
     );
 }

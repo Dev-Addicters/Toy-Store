@@ -4,7 +4,7 @@ import { useParams, useRouteMatch } from 'react-router-dom'
 
 export default function Products ({ products, addToCart, getProductsByCategory, getAllProducts }) {
 
-const { category } = useParams()
+const { category} = useParams()
 const { url } = useRouteMatch()
 
 useEffect(()=>{
@@ -19,8 +19,8 @@ useEffect(()=>{
 
   return (
     <div className='repeatAutoMinMax'>
-      {products.map(product => {
-        return <ProductCard product={product} key={product.id} addToCart={addToCart}/>
+      {products.map((product, id )=> {
+        return <ProductCard products={products} key={product.id} id={product.id} addToCart={addToCart}/>
       })}
     </div>
   )

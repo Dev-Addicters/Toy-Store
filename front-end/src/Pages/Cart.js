@@ -6,7 +6,8 @@ export default function Cart ({
   objectCartItems,
   getCartList,
   addToCart,
-  updateCart
+  updateCart,
+  buyProducts
 }) {
   useEffect(() => {
     getCartList()
@@ -15,7 +16,6 @@ export default function Cart ({
   const handleQuantity = (itemID, q) => {
     updateCart(itemID, q)
   }
-  console.log(cartItems)
 
   return (
     <div className='repeatAutoMinMax'>
@@ -26,6 +26,7 @@ export default function Cart ({
           getCartList={getCartList}
           addToCart={addToCart}
           updateCart={updateCart}
+          buyProducts={buyProducts}
         />
       ) : (
         <ContinueShopping />

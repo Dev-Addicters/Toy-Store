@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { apiURL } from './util/apiURL.js'
 import axios from 'axios'
 
+
 import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
 import Home from './Pages/Home'
@@ -19,6 +20,7 @@ export default function App () {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
+  const [ alert, setAlert ] = useState(null)
 
   useEffect(() => {
     getAllProducts()
@@ -78,10 +80,19 @@ export default function App () {
     }
   }
 
+
+  const buyProducts = () => {
+    setCartItems([])
+    setObjectCartItems({})
+    setProducts([])
+    getAllProducts()
+  }
+
   return (
     <Router>
-      <NavBar />
+      <NavBar objectCartItems={objectCartItems} />
       <main>
+        {alert}
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -93,6 +104,7 @@ export default function App () {
               getCartList={getCartList}
               addToCart={addToCart}
               updateCart={updateCart}
+              buyProducts={buyProducts}
             />
           </Route>
           <Route exact path='/products/category/:category'>
@@ -125,7 +137,7 @@ export default function App () {
           </Route>
         </Switch>
       </main>
-      <Footer />
+      <Footer objectCartItems={objectCartItems} />
     </Router>
   )
 }

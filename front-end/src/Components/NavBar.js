@@ -1,5 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Badge from '@material-ui/core/Badge'
+import Button from '@material-ui/core/Button'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchIcon from '@material-ui/icons/Search'
@@ -12,7 +14,11 @@ import cartoon from './images/cartoon-head.png'
 import exclusive from './images/exclusive-head.png'
 import soon from './images/soon-head.png'
 
-export default function NavBar () {
+export default function NavBar ({ objectCartItems }) {
+  const cartQty = Object.values(objectCartItems).reduce(
+    (acc, item) => (acc += item),
+    0
+  )
   return (
     <div className='navBar'>
       <Link to='/' className='top'>
@@ -66,7 +72,7 @@ export default function NavBar () {
           </div>
         </Link>
         <Link
-          to='/featured'
+          to='/products'
           id='featuredTab'
           className='navLink hidden-visually '
         >
@@ -120,7 +126,9 @@ export default function NavBar () {
         <AccountCircleIcon id='userLogin' />
       </Link>
       <Link to='/cart' className='navCar hidden-visually'>
-        <ShoppingCartIcon />
+        <Badge badgeContent={cartQty} color='secondary'>
+          <ShoppingCartIcon />
+        </Badge>
       </Link>
       <Link to='/products/new'>
         <button className='navButton hidden-visually'>New Items</button>

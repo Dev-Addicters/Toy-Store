@@ -45,11 +45,12 @@ const useStyles = makeStyles({
   },
   table: {
     width: '100%',
-    height: '100%'
+    height: '100%',
+
   },
   media: {
     height: 0,
-    paddingTop: '80%'
+    paddingTop: '84%'
   },
   delete: {
     '&:hover': {
@@ -64,7 +65,8 @@ const useStyles = makeStyles({
     transform: 'translateX(-2ch)'
   },
   subtotal: {
-    width: '100%'
+    width: '100%',
+    boxShadow: '0 3px 3px -2px rgba(0, 0, 0, 0.9)',
   },
   pay: {
     backgroundColor: '#263238',
@@ -92,11 +94,11 @@ export default function CartTable ({
   objectCartItems,
   getCartList,
   addToCart,
-  updateCart
+  updateCart,
+  buyProducts,
 }) {
   const classes = useStyles()
-  const bull = <span className={classes.p}>•</span>
-
+  
   const numItems = objectCartItems
     ? Object.values(objectCartItems).reduce(
         (acc, itnum) => (acc += Number(itnum)),
@@ -118,11 +120,14 @@ export default function CartTable ({
   const handleQuantity = (itemID, q) => {
     updateCart(itemID, q)
   }
+  // const buyProducts=()=>{
+  //   updateProductsDatabase()
+  // }
 
   return (
-    <React.Fragment>
+    <React.Fragment >
       <CssBaseline />
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} elevation={3}>
         <Table className={classes.table} aria-label='simple table'>
           <TableHead>
             <TableRow>
@@ -296,8 +301,8 @@ export default function CartTable ({
           </CardContent>
           <Container className={classes.centerFlex} fixed>
             <CardActions>
-              <Button variant='outlined' className={classes.pay}>
-                <Typography variant='h6' component='h2'>
+              <Button variant='outlined' className={classes.pay} >
+                <Typography variant='h6' component='h2' onClick={()=>buyProducts()}>
                   PAY NOW
                 </Typography>
               </Button>

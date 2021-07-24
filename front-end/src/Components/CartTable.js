@@ -120,9 +120,6 @@ export default function CartTable ({
   const handleQuantity = (itemID, q) => {
     updateCart(itemID, q)
   }
-  // const buyProducts=()=>{
-  //   updateProductsDatabase()
-  // }
 
   return (
     <React.Fragment >

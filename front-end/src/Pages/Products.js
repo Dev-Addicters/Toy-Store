@@ -1,26 +1,36 @@
-import React, {   useEffect } from 'react'
+import React, { useEffect } from 'react'
 import ProductCard from '../Components/ProductCard'
 import { useParams, useRouteMatch } from 'react-router-dom'
 
-export default function Products ({ products, addToCart, getProductsByCategory, getAllProducts }) {
+export default function Products ({
+  products,
+  addToCart,
+  getProductsByCategory,
+  getAllProducts
+}) {
+  const { category } = useParams()
+  const { url } = useRouteMatch()
 
-const { category} = useParams()
-const { url } = useRouteMatch()
-
-useEffect(()=>{
-  if (category !== undefined) {
-    let categoryTrimed = category.split('-').join(' ');
-    getProductsByCategory(categoryTrimed)
-  }else{
-    getAllProducts()
-  }
-}, [category, url])
-
+  useEffect(() => {
+    if (category !== undefined) {
+      let categoryTrimed = category.split('-').join(' ')
+      getProductsByCategory(categoryTrimed)
+    } else {
+      getAllProducts()
+    }
+  }, [category, url])
 
   return (
     <div className='repeatAutoMinMax'>
-      {products.map((product, id )=> {
-        return <ProductCard products={product} key={product.id} id={product.id} addToCart={addToCart}/>
+      {products.map((product, id) => {
+        return (
+          <ProductCard
+            products={product}
+            key={product.id}
+            id={product.id}
+            addToCart={addToCart}
+          />
+        )
       })}
     </div>
   )

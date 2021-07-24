@@ -19,7 +19,7 @@ export default function Footer ({ objectCartItems }) {
       <Link to='/products'>
         <ViewListIcon />
       </Link>
-      <Link to='/login'>
+      <Link to='/'>
         <AccountCircleIcon />
       </Link>
       <Link to='/cart'>

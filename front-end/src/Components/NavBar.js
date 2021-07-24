@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge'
-import Button from '@material-ui/core/Button'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
 import SearchIcon from '@material-ui/icons/Search'
@@ -122,7 +121,7 @@ export default function NavBar ({ objectCartItems }) {
         <SearchIcon id='searchIcon' />
         <input className='navInput'></input>
       </form>
-      <Link to='/login' className='navProfile hidden-visually '>
+      <Link to='/' className='navProfile hidden-visually '>
         <AccountCircleIcon id='userLogin' />
       </Link>
       <Link to='/cart' className='navCar hidden-visually'>

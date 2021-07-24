@@ -24,24 +24,21 @@ const useStyles = makeStyles({
       background: '#e0e0e0'
     }
   },
-  txt:{
+  txt: {
     color: 'black',
-    fontSize: '1em',
+    fontSize: '1em'
   }
 })
 
-
-export default function Show ({product, addToCart}) {
+export default function Show ({ product, addToCart }) {
   const classes = useStyles()
 
   let { id } = useParams()
   const [products, setProducts] = useState({})
-  // console.log(products, "hello")
+
   const history = useHistory()
-  // const [productDetails, setProductDetails] = useState({})
 
   useEffect(() => {
-    
     axios
       .get(`${API}/products/${id}`)
       .then(res => {
@@ -53,16 +50,23 @@ export default function Show ({product, addToCart}) {
   }, [])
 
   return (
-    <div className="showGrid">
-      <div className="showGridDiv1">
-            <Button component={Link} to={`/products`} variant='outlined' className={classes.productshowB}>
-                <Typography variant='h6' component='h2'className={classes.txt}>
-                  BACK
-                </Typography>
-              </Button>
+    <div className='showGrid'>
+      <div className='showGridDiv1'>
+        <Button
+          component={Link}
+          to={`/products`}
+          variant='outlined'
+          className={classes.productshowB}
+        >
+          <Typography variant='h6' component='h2' className={classes.txt}>
+            BACK
+          </Typography>
+        </Button>
       </div>
       <ItemsApi products={products} id={id} addToCart={addToCart} />
-      <Link to={`/products`} className="garabe"><img src={newPhoto} alt="garabe"/></Link>
+      <Link to={`/products`} className='garabe'>
+        <img src={newPhoto} alt='garabe' />
+      </Link>
     </div>
   )
 }

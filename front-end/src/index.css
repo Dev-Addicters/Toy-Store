@@ -67,11 +67,12 @@ main {
 }
 .four0four h1 {
   position: absolute;
+  z-index: 99;
 }
 .four0four img {
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
   position: relative;
 }
 .navBar,
@@ -173,11 +174,11 @@ main {
   text-align: center;
 }
 
-.productCard a{
+.productCard a {
   text-decoration: none;
-  color: black
+  color: black;
 }
-.productCard a:hover{
+.productCard a:hover {
   transition: all 1.3s;
   font-size: 22px;
   color: red;
@@ -188,31 +189,31 @@ main {
   color: black;
 }
 
-.Details button{
+.Details button {
   font-size: 20px;
 }
 
-.forminput{
+.forminput {
   margin-top: 50px;
- display: flex;
- flex-direction: column;
- border-radius: 10px;
- border: 1px solid black;
- background-color: aliceblue;
- gap: 10px;
- width: 500px;
- height: 300px;
- margin-left: 300px;
- padding: 15px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: aliceblue;
+  gap: 10px;
+  width: 500px;
+  height: 300px;
+  margin-left: 300px;
+  padding: 15px;
 }
-.newimgap{
+.newimgap {
   margin-left: 320px;
 }
-.imgnewPro{
+.imgnewPro {
   width: 300px;
   height: 350px;
 }
-.productCardnew{
+.productCardnew {
   float: right;
   width: 550px;
   height: 720px;
@@ -226,7 +227,7 @@ main {
   border-radius: 5px;
   box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.9);
 }
-.forminput input{
+.forminput input {
   width: 400px;
   font-size: 18px;
 }
@@ -236,7 +237,7 @@ main {
   text-align: center;
   margin: auto;
 }
-.buttonupt{
+.buttonupt {
   margin-top: 20px;
   margin-left: 170px;
 }
@@ -245,8 +246,8 @@ main {
   margin-top: -350px;
 }
 
-.productshowB:hover{
-  background: '#1b5e20'
+.productshowB:hover {
+  background: "#1b5e20";
 }
 
 .garabe {
@@ -263,7 +264,7 @@ main {
   margin-right: 130px;
 }
 
-.showGrid{
+.showGrid {
   width: 100vw;
   height: 100vh;
   display: grid;
@@ -271,34 +272,34 @@ main {
   overflow: scroll;
 }
 
-.showGridDiv2{
+.showGridDiv2 {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: minmax(10%,15%) 1fr 1fr;
+  grid-template-rows: minmax(10%, 15%) 1fr 1fr;
   /* overflow: scroll; */
 }
 
-.shGriDv2-TwoDivs{
+.shGriDv2-TwoDivs {
   width: 100%;
   height: auto;
   display: grid;
   grid-template-columns: minmax(20%, 35%) 1fr;
 }
-.shGriDv2-TwoDivs img{
+.shGriDv2-TwoDivs img {
   width: 100%;
   height: 100%;
-  margin: 2% 4%
+  margin: 2% 4%;
 }
-.itemDetails, .textDetails{
+.itemDetails,
+.textDetails {
   width: 100%;
   height: 100%;
-  display:flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 }
-
 
 #root {
   width: 100vw;
@@ -350,7 +351,7 @@ main {
     flex-shrink: inherit;
   }
 
-  .showGrid{
+  .showGrid {
     width: 100vw;
     height: 72vh;
   }
@@ -399,29 +400,50 @@ main {
     height: 40vh;
   }
 
-  .showGridDiv2{
+  .showGridDiv2 {
     width: 100%;
     height: 100%;
   }
 
-  .shGriDv2-TwoDivs{
+  .shGriDv2-TwoDivs {
     width: 100%;
     height: auto;
     margin: 1% 0 1% 0;
     display: flex;
     flex-direction: column;
   }
-  .shGriDv2-TwoDivs img{
+  .shGriDv2-TwoDivs img {
     height: 50%;
-    margin:0;
+    margin: 0;
   }
 
+  .four0four {
+    margin-top: 1vh;
+    height: 65vh;
+  }
 
-
-  #root > main > div > div.showGridDiv2 > div.shGriDv2-TwoDivs > div > div.makeStyles-buttonsDiv-4 > a > span.MuiButton-label > h2{
+  #root
+    > main
+    > div
+    > div.showGridDiv2
+    > div.shGriDv2-TwoDivs
+    > div
+    > div.makeStyles-buttonsDiv-4
+    > a
+    > span.MuiButton-label
+    > h2 {
     font-size: 0.75em;
   }
-  #root > main > div > div.showGridDiv2 > div.shGriDv2-TwoDivs > div > div.makeStyles-buttonsDiv-4 > button > span.MuiButton-label > h2{
+  #root
+    > main
+    > div
+    > div.showGridDiv2
+    > div.shGriDv2-TwoDivs
+    > div
+    > div.makeStyles-buttonsDiv-4
+    > button
+    > span.MuiButton-label
+    > h2 {
     font-size: 0.75em;
   }
   #searchIcon {

@@ -2,9 +2,8 @@ import { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { apiURL } from './util/apiURL.js'
 import axios from 'axios'
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
@@ -18,7 +17,7 @@ import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-export default function App() {
+export default function App () {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
@@ -39,13 +38,16 @@ export default function App() {
     setObjectCartItems(objItems)
   }
 
-  const addNewCard = (newCard) => {
-    axios.get(`${API}/products`, newCard).then((res) => {
-      return axios.get(`${API}/products`)
-    }).then((res) => {
-      setProducts(res.data)
-    })
-      .catch((e) => {
+  const addNewCard = newCard => {
+    axios
+      .get(`${API}/products`, newCard)
+      .then(res => {
+        return axios.get(`${API}/products`)
+      })
+      .then(res => {
+        setProducts(res.data)
+      })
+      .catch(e => {
         console.log(e)
       })
   }
@@ -93,18 +95,20 @@ export default function App() {
     }
   }
 
-
   const buyProducts = async () => {
-    const buyItems = [];
+    const buyItems = []
     for (const id in objectCartItems) {
-      buyItems.push({ id, quantity: -objectCartItems[id] });
+      buyItems.push({ id, quantity: -objectCartItems[id] })
     }
     try {
-      const res = await axios.put(`${API}/products/${buyItems.map(item => item.id).join(",")}`, buyItems)
-      setObjectCartItems({});
-      toast.success('Thank you for your order!');
+      const res = await axios.put(
+        `${API}/products/${buyItems.map(item => item.id).join(',')}`,
+        buyItems
+      )
+      setObjectCartItems({})
+      toast.success('Thank you for your order!')
     } catch (e) {
-      toast.error("Something went wrong.");
+      toast.error('Something went wrong.')
     }
   }
 

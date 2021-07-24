@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { apiURL } from '../util/apiURL.js'
 import ReviewsForm from './ReviewsForm'
-import Review from './Review.js'
+import Paper from '@material-ui/core/Paper'
 
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
@@ -63,6 +63,34 @@ const useStyles = makeStyles({
   h1product: {
     display: 'grid',
     placeItems: 'center'
+  },
+  buttonsDiv: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center'
+  },
+  productshowB: {
+    backgroundColor: '#eeeeee',
+    width: '20%',
+    margin: '10px 20px 0px 10px',
+    borderRadius: '10px',
+    '&:hover': {
+      background: '#e0e0e0'
+    }
+  },
+  txt: {
+    color: 'black',
+    fontSize: '1em'
+  },
+  reviewEdit: {
+    marginTop: '20px'
+  },
+  fit: {
+    width: '100%',
+    height: '100%',
+    padding: '20px'
   }
 })
 
@@ -72,6 +100,7 @@ export default function Reviews ({ productId }) {
   const [allReviews, setAllReviews] = useState([])
   const classes = useStyles()
   const [expanded, setExpanded] = React.useState('panel1')
+  const [editReview, setEditReview] = useState(false)
 
   const handleChange = panel => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false)
@@ -162,13 +191,65 @@ export default function Reviews ({ productId }) {
                     value={Number(review.rating)}
                     readOnly
                   />
+
+                  <div className={classes.buttonsDiv}>
+                    <Button
+                      onClick={() => setEditReview(!editReview)}
+                      variant='outlined'
+                      className={classes.productshowB}
+                    >
+                      <Typography
+                        variant='h6'
+                        component='h2'
+                        className={classes.txt}
+                      >
+                        {editReview ? 'Cancel' : 'Edit'}
+                      </Typography>
+                    </Button>
+                    <Button
+                      onClick={() => deleteReview(review.id)}
+                      variant='outlined'
+                      className={classes.productshowB}
+                    >
+                      <Typography
+                        variant='h6'
+                        component='h2'
+                        className={classes.txt}
+                      >
+                        Delete
+                      </Typography>
+                    </Button>
+                  </div>
+
+                  <div className={classes.reviewEdit}>
+                    {editReview && (
+                      <ReviewsForm
+                        newForm={false}
+                        editReview={editReview}
+                        setEditReview={setEditReview}
+                        updateReview={updateReview}
+                        reviewDetails={review}
+                      />
+                    )}
+                  </div>
                 </Container>
               </AccordionDetails>
             </Accordion>
           )
         })}
-
-        <ReviewsForm newForm={true} createReview={createReview} />
+        <CssBaseline />
+        <Container maxWidth='xl' component={Paper} elevation={3}>
+          <Typography
+            color='textSecondary'
+            style={{ fontSize: '30px' }}
+            gutterBottom
+          >
+            <b>Make a New Review</b>
+          </Typography>
+          <div className={classes.fit}>
+            <ReviewsForm newForm={true} createReview={createReview} />
+          </div>
+        </Container>
       </div>
     </div>
   )

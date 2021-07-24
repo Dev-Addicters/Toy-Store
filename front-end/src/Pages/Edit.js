@@ -1,10 +1,10 @@
 import React from 'react'
-import EditItems from '../Components/EditItems'
+import EditItem from '../Components/EditItem'
 
-export default function Edit() {
+export default function Edit({updateProduct}) {
     return (
-        <div>
-          <EditItems />
+        <div className="showGrid">
+          <EditItem updateProduct={updateProduct}/>
         </div>
     )
 }

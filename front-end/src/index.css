@@ -277,7 +277,6 @@ main {
   height: 100%;
   display: grid;
   grid-template-rows: minmax(10%, 15%) 1fr 1fr;
-  /* overflow: scroll; */
 }
 
 .shGriDv2-TwoDivs {

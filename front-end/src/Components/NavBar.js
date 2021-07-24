@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{ useState }from 'react'
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
@@ -13,7 +13,19 @@ import cartoon from './images/cartoon-head.png'
 import exclusive from './images/exclusive-head.png'
 import soon from './images/soon-head.png'
 
-export default function NavBar ({ objectCartItems }) {
+export default function NavBar ({ objectCartItems, getUserSearch }) {
+
+  const [ search, setSearch ] = useState('')
+  const handlesearchChange =e =>{
+    setSearch(e.target.value)
+  }
+
+  const submitUserSearch = event =>{
+    setSearch('')
+    getUserSearch(search)
+}
+
+
   const cartQty = Object.values(objectCartItems).reduce(
     (acc, item) => (acc += item),
     0
@@ -119,7 +131,7 @@ export default function NavBar ({ objectCartItems }) {
 
       <form>
         <SearchIcon id='searchIcon' />
-        <input className='navInput'></input>
+        <input className='navInput' onKeyPress={(e) => e.key === 'Enter' && submitUserSearch(e)} onChange={handlesearchChange} ></input>
       </form>
       <Link to='/' className='navProfile hidden-visually '>
         <AccountCircleIcon id='userLogin' />
@@ -130,7 +142,7 @@ export default function NavBar ({ objectCartItems }) {
         </Badge>
       </Link>
       <Link to='/products/new'>
-        <button className='navButton hidden-visually'>New Items</button>
+        <button className='navButton hidden-visually'>New Item</button>
       </Link>
     </div>
   )

@@ -21,7 +21,6 @@ export default function App () {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
-  const [alert, setAlert] = useState(null)
 
   useEffect(() => {
     getAllProducts()
@@ -29,55 +28,12 @@ export default function App () {
 
   const addToCart = id => {
     let objItems = Object.assign({}, objectCartItems)
-
     if (!Object.keys(objItems).includes(id.toString())) {
       objItems[id.toString()] = 0
     }
     objItems[id.toString()] += 1
 
     setObjectCartItems(objItems)
-  }
-
-  const addNewCard = newCard => {
-    axios
-      .get(`${API}/products`, newCard)
-      .then(res => {
-        return axios.get(`${API}/products`)
-      })
-      .then(res => {
-        setProducts(res.data)
-      })
-      .catch(e => {
-        console.log(e)
-      })
-  }
-
-  const updateCart = (id, quantity) => {
-    let objItems = Object.assign({}, objectCartItems)
-    objItems[id.toString()] += quantity
-    if (objItems[id.toString()] === 0) {
-      delete objItems[id.toString()]
-    }
-    setObjectCartItems(objItems)
-  }
-
-  const getAllProducts = () => {
-    axios
-      .get(`${API}/products`)
-      .then(
-        response => setProducts(response.data),
-        error => console.log('get', error)
-      )
-      .catch(c => console.warn('catch', c))
-  }
-  const getProductsByCategory = category => {
-    axios
-      .get(`${API}/products?category=${category}`)
-      .then(
-        response => setProducts(response.data),
-        error => console.log('get', error)
-      )
-      .catch(c => console.warn('catch', c))
   }
 
   const getCartList = () => {
@@ -92,6 +48,68 @@ export default function App () {
         .catch(c => console.warn('catch', c))
     } else {
       setCartItems([])
+    }
+  }
+
+// CREATE
+  const addNewCard = async (newCard ) => {
+    try {
+      const res = await axios.post(`${API}/products/`,newCard)
+      toast.success('Product added to Inventory!')
+    } catch (e) {
+      toast.error('Something went wrong.')
+    }
+  }
+
+  // UPDATE
+  const updateCart = (id, quantity) => {
+    let objItems = Object.assign({}, objectCartItems)
+    objItems[id.toString()] += quantity
+    if (objItems[id.toString()] === 0) {
+      delete objItems[id.toString()]
+    }
+    setObjectCartItems(objItems)
+  }
+
+  // SHOW
+
+  const getUserSearch = async ( userInput ) => {
+    try {
+      const res = await axios.get(`${API}/products?name=${userInput}`)
+      setProducts(res)
+      toast.success('Product Found')
+    } catch (e) {
+      toast.error('Not Found')
+    }
+  }
+
+  const getAllProducts = () => {
+    axios
+      .get(`${API}/products?sortBy=id`)
+      .then(
+        response => setProducts(response.data),
+        error => console.log('get', error)
+      )
+      .catch(c => console.warn('catch', c))
+  }
+
+  const getProductsByCategory = category => {
+    axios
+      .get(`${API}/products?category=${category}`)
+      .then(
+        response => setProducts(response.data),
+        error => console.log('get', error)
+      )
+      .catch(c => console.warn('catch', c))
+  }
+
+  // UPDATE
+  const updateProduct = async (id, editedProduct) => {
+    try {
+      const res = await axios.put(`${API}/products/${id}`,editedProduct)
+      toast.success('Successful Modification!')
+    } catch (e) {
+      toast.error('Something went wrong.')
     }
   }
 
@@ -112,10 +130,22 @@ export default function App () {
     }
   }
 
+  
+
   return (
     <Router>
-      <ToastContainer></ToastContainer>
-      <NavBar objectCartItems={objectCartItems} />
+      <ToastContainer
+        position='top-center'
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      ></ToastContainer>
+      <NavBar objectCartItems={objectCartItems} getUserSearch={getUserSearch}/>
       <main>
         {alert}
         <Switch>
@@ -155,7 +185,7 @@ export default function App () {
             <Show product={products} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/:id/edit'>
-            <Edit />
+            <Edit updateProduct={updateProduct}/>
           </Route>
           <Route>
             <Four0Four />

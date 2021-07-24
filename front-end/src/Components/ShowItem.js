@@ -1,9 +1,12 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, withRouter, useHistory } from 'react-router-dom'
 import Reviews from "./Reviews";
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
+import axios from 'axios';
+import { apiURL } from '../util/apiURL';
+import { toast } from 'react-toastify';
 
 const useStyles = makeStyles({
 
@@ -29,49 +32,68 @@ const useStyles = makeStyles({
       background: '#e0e0e0'
     }
   },
-  txt:{
+  txt: {
     color: 'black',
     fontSize: '1em'
   }
 })
 
-  
+const API = apiURL()
+
 function ItemsApi(props) {
   const { products, id, addToCart } = props
   const classes = useStyles()
+  const history = useHistory()
+
+  const handleDelete = id => {
+    axios.delete(`${API}/products/${id}`)
+      .then(res => {
+        toast.success('Product deleted successfully!')
+        history.push(`/products`)
+      })
+      .catch(e => {
+        toast.error('Something went wrong.')
+      })
+  }
+
   return (
     <div className="showGridDiv2">
       <Typography variant='h3' className={classes.h1product}>
-      {products.name}
+        {products.name}
       </Typography>
       <div className="shGriDv2-TwoDivs">
         <img src={products.image} alt={products.name} />
-      <div className="itemDetails">
-        <div className="textDetails">
-        <Typography variant='h4'>
-        Category : {products.category} 
-        </Typography>
-          <Typography variant='h4'>
-          Product name: {products.name}
-          </Typography>
-          <Typography variant='h4'>
-          Product Price: $ {products.price}
-          </Typography>
+        <div className="itemDetails">
+          <div className="textDetails">
+            <Typography variant='h4'>
+              Category : {products.category}
+            </Typography>
+            <Typography variant='h4'>
+              Product name: {products.name}
+            </Typography>
+            <Typography variant='h4'>
+              Product Price: $ {products.price}
+            </Typography>
 
-        </div>
-        <div className={classes.buttonsDiv}>
-        <Button component={Link} to={`/products/${id}/edit`} variant='outlined' className={classes.productshowB}>
-                <Typography variant='h6' component='h2'className={classes.txt}>
+          </div>
+          <div className={classes.buttonsDiv}>
+            <Button component={Link} to={`/products/${id}/edit`} variant='outlined' className={classes.productshowB}>
+              <Typography variant='h6' component='h2' className={classes.txt}>
                 Edit Product
-                </Typography>
-              </Button>
-              <Button onClick={() => addToCart(products.id)} variant='outlined' className={classes.productshowB}>
-                <Typography variant='h6' component='h2'className={classes.txt}>
+              </Typography>
+            </Button>
+            <Button onClick={() => handleDelete(products.id)} variant='outlined' className={classes.productshowB}>
+              <Typography variant='h6' component='h2' className={classes.txt}>
+                Delete Product
+              </Typography>
+            </Button>
+            <Button onClick={() => addToCart(products.id)} variant='outlined' className={classes.productshowB}>
+              <Typography variant='h6' component='h2' className={classes.txt}>
                 Add to Cart
-                </Typography>
-              </Button>
+              </Typography>
+            </Button>
+          </div>
         </div>
-      </div>
       </div>
       <Reviews productId={id} />
     </div>

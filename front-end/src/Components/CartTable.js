@@ -89,29 +89,30 @@ const useStyles = makeStyles({
   }
 })
 
-export default function CartTable ({
+export default function CartTable({
   cartItems,
   objectCartItems,
   getCartList,
   addToCart,
   updateCart,
   buyProducts,
+  placingOrder
 }) {
   const classes = useStyles()
-  
+
   const numItems = objectCartItems
     ? Object.values(objectCartItems).reduce(
-        (acc, itnum) => (acc += Number(itnum)),
-        0
-      )
+      (acc, itnum) => (acc += Number(itnum)),
+      0
+    )
     : 0
   const subTotal = parseFloat(
     cartItems
       ? cartItems.reduce(
-          (acc, item) =>
-            (acc += Number(item.price) * Number(objectCartItems[`${item.id}`])),
-          0
-        )
+        (acc, item) =>
+          (acc += Number(item.price) * Number(objectCartItems[`${item.id}`])),
+        0
+      )
       : 0
   ).toFixed(2)
   const tax = parseFloat(subTotal * 0.07).toFixed(2)
@@ -298,11 +299,19 @@ export default function CartTable ({
           </CardContent>
           <Container className={classes.centerFlex} fixed>
             <CardActions>
-              <Button variant='outlined' className={classes.pay} >
-                <Typography variant='h6' component='h2' onClick={()=>buyProducts()}>
-                  PAY NOW
-                </Typography>
-              </Button>
+              {placingOrder ?
+                <Button variant='outlined' className={classes.pay} >
+                  <Typography variant='h6' component='h2'>
+                    Please wait while placing order...
+                  </Typography>
+                </Button>
+                :
+                <Button variant='outlined' className={classes.pay} >
+                  <Typography variant='h6' component='h2' onClick={() => buyProducts()}>
+                    PAY NOW
+                  </Typography>
+                </Button>
+              }
             </CardActions>
           </Container>
         </Card>

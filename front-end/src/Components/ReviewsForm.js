@@ -2,21 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
-import { makeStyles } from '@material-ui/core/styles'
 import TextField from '@material-ui/core/TextField'
 import Container from '@material-ui/core/Container'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 
-const useStyles = makeStyles(theme => ({
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: '25ch'
-  }
-}))
-
-export default function ReviewsForm ({
+export default function ReviewsForm({
   newForm,
   createReview,
   editReview,
@@ -36,6 +27,7 @@ export default function ReviewsForm ({
     setUserReview(
       reviewDetails ? reviewDetails : { ...userReview, product_id: id }
     )
+    // eslint-disable-next-line
   }, [])
 
   const handleTextChange = event => {
@@ -82,7 +74,6 @@ export default function ReviewsForm ({
             style={{ margin: 0, padding: 10 }}
             InputLabelProps={{ shrink: true }}
             onChange={handleTextChange}
-            value={userReview.title}
             placeholder='Your title'
             value={userReview.title}
             label='Title'

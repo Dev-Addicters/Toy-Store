@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-function NewItem (props) {
+function NewItem(props) {
   const classes = useStyles()
   const history = useHistory()
   const [newProduct, setNewProduct] = useState({
@@ -64,10 +64,11 @@ function NewItem (props) {
   })
 
   const handleInput = e => {
-    setNewProduct({ ...newProduct, [e.target.id]: e.target.value })
+    const { id, value } = e.target
+    setNewProduct({ ...newProduct, [id]: id === "quantity" ? Number(value) : value })
   }
   const handleCheck = () => {
-    setNewProduct({ ...setNewProduct, is_new: !newProduct.is_new })
+    setNewProduct({ ...newProduct, is_new: !newProduct.is_new })
   }
   const handleSubmit = e => {
     e.preventDefault()
@@ -154,6 +155,18 @@ function NewItem (props) {
               label='Quantity'
               type='number'
               id='quantity'
+              fullWidth
+              required
+            />
+            <TextField
+              style={{ margin: 0, padding: 10 }}
+              InputLabelProps={{ shrink: true }}
+              onChange={handleInput}
+              value={newProduct.image}
+              placeholder='http://'
+              label='Image URL'
+              variant='outlined'
+              id='image'
               fullWidth
               required
             />

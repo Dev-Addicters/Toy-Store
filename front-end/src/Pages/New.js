@@ -1,10 +1,10 @@
 import React from 'react'
-import NewItems from '../Components/NewItems'
+import NewItem from '../Components/NewItem'
 
 export default function New({addNewCard }) {
     return (
-        <div>
-            <NewItems  addNewCard={addNewCard}/>
+        <div className="showGrid">
+            <NewItem  addNewCard={addNewCard}/>
         </div>
     )
 }

@@ -23,7 +23,7 @@ export default function AlertDialog () {
   return (
     <div style={{ display: 'grid', placeItems: 'center' }}>
       <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-        START SHOPPING
+        CONTINUE SHOPPING
       </Button>
       <Dialog
         open={open}
@@ -51,7 +51,7 @@ export default function AlertDialog () {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color='primary'>
-            PRODUCTS
+            SHOW ME THE PRODUCTS
           </Button>
         </DialogActions>
       </Dialog>

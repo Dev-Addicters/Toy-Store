@@ -13,14 +13,17 @@ import New from './Pages/New'
 import Show from './Pages/Show'
 import Edit from './Pages/Edit'
 import Cart from './Pages/Cart'
+import Results from './Pages/Results.js'
 import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-export default function App () {
+export default function App() {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
+  const [placingOrder, setPlacingOrder] = useState(false)
+  const [results, setResults] = useState([])
 
   useEffect(() => {
     getAllProducts()
@@ -51,10 +54,11 @@ export default function App () {
     }
   }
 
-// CREATE
-  const addNewCard = async (newCard ) => {
+  // CREATE
+  const addNewCard = async (newCard) => {
     try {
-      const res = await axios.post(`${API}/products/`,newCard)
+      // eslint-disable-next-line
+      const res = await axios.post(`${API}/products/`, newCard)
       toast.success('Product added to Inventory!')
     } catch (e) {
       toast.error('Something went wrong.')
@@ -73,13 +77,12 @@ export default function App () {
 
   // SHOW
 
-  const getUserSearch = async ( userInput ) => {
+  const getUserSearch = async (userInput) => {
     try {
-      const res = await axios.get(`${API}/products?name=${userInput}`)
-      setProducts(res)
-      toast.success('Product Found')
+      const { data } = await axios.get(`${API}/products?search=${userInput}`)
+      setResults(data)
     } catch (e) {
-      toast.error('Not Found')
+      toast.error('Something went wrong')
     }
   }
 
@@ -106,7 +109,8 @@ export default function App () {
   // UPDATE
   const updateProduct = async (id, editedProduct) => {
     try {
-      const res = await axios.put(`${API}/products/${id}`,editedProduct)
+      // eslint-disable-next-line
+      const res = await axios.put(`${API}/products/${id}`, editedProduct)
       toast.success('Successful Modification!')
     } catch (e) {
       toast.error('Something went wrong.')
@@ -118,19 +122,40 @@ export default function App () {
     for (const id in objectCartItems) {
       buyItems.push({ id, quantity: -objectCartItems[id] })
     }
-    try {
-      const res = await axios.put(
-        `${API}/products/${buyItems.map(item => item.id).join(',')}`,
-        buyItems
-      )
-      setObjectCartItems({})
-      toast.success('Thank you for your order!')
-    } catch (e) {
-      toast.error('Something went wrong.')
-    }
+    axios.put(
+      `${API}/products/${buyItems.map(item => item.id).join(',')}`,
+      buyItems
+    ).then(res => {
+      setPlacingOrder(true)
+      toast.success('Thank you, your order has been placed!', {
+        position: "top-center",
+        autoClose: 4000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false,
+        progress: undefined,
+      });
+      setTimeout(() => {
+        setObjectCartItems({})
+        setPlacingOrder(false)
+      }, 4000);
+    })
+      .catch(e => {
+        setPlacingOrder(false)
+        toast.error('Something went wrong.', {
+          position: "top-center",
+          autoClose: 4000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: false,
+          progress: undefined,
+        })
+      })
   }
 
-  
+
 
   return (
     <Router>
@@ -145,7 +170,7 @@ export default function App () {
         draggable
         pauseOnHover
       ></ToastContainer>
-      <NavBar objectCartItems={objectCartItems} getUserSearch={getUserSearch}/>
+      <NavBar objectCartItems={objectCartItems} getUserSearch={getUserSearch} />
       <main>
         {alert}
         <Switch>
@@ -160,6 +185,13 @@ export default function App () {
               addToCart={addToCart}
               updateCart={updateCart}
               buyProducts={buyProducts}
+              placingOrder={placingOrder}
+            />
+          </Route>
+          <Route exact path='/results'>
+            <Results
+              results={results}
+              addToCart={addToCart}
             />
           </Route>
           <Route exact path='/products/category/:category'>
@@ -185,7 +217,7 @@ export default function App () {
             <Show product={products} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/:id/edit'>
-            <Edit updateProduct={updateProduct}/>
+            <Edit updateProduct={updateProduct} />
           </Route>
           <Route>
             <Four0Four />

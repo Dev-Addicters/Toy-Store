@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Show ({ product, addToCart }) {
+export default function Show({ product, addToCart }) {
   const classes = useStyles()
 
   let { id } = useParams()
@@ -47,6 +47,7 @@ export default function Show ({ product, addToCart }) {
       .catch(e => {
         history.push('/not-found')
       })
+    // eslint-disable-next-line
   }, [])
 
   return (

@@ -1,21 +1,19 @@
 import React, { useEffect } from 'react'
 import CartTable from '../Components/CartTable'
 import ContinueShopping from '../Pages/ContinueShopping'
-export default function Cart ({
+export default function Cart({
   cartItems,
   objectCartItems,
   getCartList,
   addToCart,
   updateCart,
-  buyProducts
+  buyProducts,
+  placingOrder
 }) {
   useEffect(() => {
     getCartList()
+    // eslint-disable-next-line
   }, [objectCartItems])
-
-  const handleQuantity = (itemID, q) => {
-    updateCart(itemID, q)
-  }
 
   return (
     <div className='repeatAutoMinMax'>
@@ -27,6 +25,7 @@ export default function Cart ({
           addToCart={addToCart}
           updateCart={updateCart}
           buyProducts={buyProducts}
+          placingOrder={placingOrder}
         />
       ) : (
         <ContinueShopping />

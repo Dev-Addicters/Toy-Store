@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 
 const API = apiURL()
 
-export default function EditItem ({ updateProduct }) {
+export default function EditItem({ updateProduct }) {
   let { id } = useParams()
   const [product, setProduct] = useState({})
   const history = useHistory()
@@ -91,6 +91,7 @@ export default function EditItem ({ updateProduct }) {
       .catch(e => {
         history.push('/not-found')
       })
+    // eslint-disable-next-line
   }, [])
   return (
     <>
@@ -98,7 +99,7 @@ export default function EditItem ({ updateProduct }) {
         {product.name}
       </Typography>
       <div className='shGriDv2-TwoDivs'>
-        <img src={product.image} alt={product.name} style={{transform: 'scale(0.8)'}}/>
+        <img src={product.image} alt={product.name} style={{ transform: 'scale(0.8)' }} />
 
         <CssBaseline />
         <Container

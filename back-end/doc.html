@@ -37,9 +37,11 @@
 </head>
 <body>
     <h2 class="center">Welcome to toy store API !</h2>
-    <h3>BASE URL</h3>
+    <h3 class="crud">BASE URL</h3>
     <h3 class="endpoint">https://fathomless-everglades-31856.herokuapp.com</h3>
-    <h3>Endpoints</h3>
+    <br />
+    <h3 class="crud">Products Endpoints</h3>
+    <br />
     <h3 class="crud">GET</h3>
     <h3 class="endpoint">/products</h3>
     <h4>For all products</h4>
@@ -106,6 +108,63 @@
     <h3 class="crud">DELETE</h3>
     <h3 class="endpoint">/products/{ids}</h3>
     <p>See <a href="#GETexamples">GET endpoint</a> for actual link examples</p>
-    <p>When sending a request to delete more than one tranction, separate ids by comma " , ".</p>
+    <p>When sending a request to delete more than one product, separate ids by comma " , ".</p>
+
+    <br />
+    <h3 class="crud">Product Reviews Endpoints</h3>
+    <br />
+    <h3 class="crud">GET</h3>
+    <h3 class="endpoint">/products/{productId}/itemreviews</h3>
+    <h4>For all reviews of a product</h4>
+    <p>Example: &nbsp;<span class="example">https://fathomless-everglades-31856.herokuapp.com/products/1/itemreviews</span></p>
+    <p>This will return all reviews of product id 1, an array of objects.</p>
+    <pre>
+    [
+        {
+            "id": 3,
+            "reviewer": "Max",
+            "title": "So Cool!!",
+            "content": "I just love such a cool concept!! Would definitely recommend getting one!!!",
+            "rating": "5",
+            "product_id": 1
+        },
+        {
+            "id": 5,
+            "reviewer": "Emily",
+            "title": "Great Quality!",
+            "content": "I love this product, it is a great quality product and I am very happy with it.",
+            "rating": "4",
+            "product_id": 1
+        },
+        ...
+    ]
+    </pre>
+    <h3 class="crud" id="#review-example">GET</h3>
+    <h3 class="endpoint">/products/{productId}/itemreviews/{reviewId}</h3>
+    <h4>For one specific reveiw of a specific product</h4>
+    <p>Example: &nbsp;<span class="example">https://fathomless-everglades-31856.herokuapp.com/products/1/itemreviews/3</span></p>
+    <p>This will return a specific review (id 3) of a product (id 1).</p>
+    <br />
+    <h3 class="crud" id="review-post-ex">POST</h3>
+    <h3 class="endpoint">/products/{productId}/itemreviews</h3>
+    <p>POST object is required to be in this format:</p>
+    <pre>
+    {
+        "reviewer": "string type, reviewer name",
+        "title": "string type, review title",
+        "content": "string type, the acutal review",
+        "rating": "numeric in string type, from 0 to 5"
+    }
+    </pre>
+    <br />
+    <h3 class="crud">PUT</h3>
+    <h3 class="endpoint">/products/{productId}/itemreviews/{reviewId}</h3>
+    <p>See <a href="#review-example">GET endpoint</a> for actual link example</p>
+    <p>See <a href="#review-post-ex">POST endpoint</a> for data structure</p>
+    <br />
+    <h3 class="crud">DELETE</h3>
+    <h3 class="endpoint">/products/{productId}/itemreviews/{reviewId}</h3>
+    <p>See <a href="#review-example">GET endpoint</a> for actual link examples</p>
+    <p>Deletes a specific review.</p>
 </body>
 </html>

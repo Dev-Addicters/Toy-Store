@@ -14,6 +14,7 @@ import TextField from '@material-ui/core/TextField'
 import Container from '@material-ui/core/Container'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
+import MenuItem from '@material-ui/core/MenuItem'
 
 const useStyles = makeStyles(theme => ({
   textField: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     height: 'minmax(5%,8%)',
     display: 'grid',
     placeItems: 'center',
-    textAlign: 'center',
+    textAlign: 'center'
   },
   buttonsDiv: {
     width: '100%',
@@ -48,12 +49,24 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '100%',
     padding: '30px'
-  }
+  },
+  check : { transform: 'translate(10px, -10px)', 
+            width:'40%'}
 }))
 
 const API = apiURL()
+const categories = [
+  { value: 'Disney', label: 'Disney' },
+  { value: 'Game of Thrones', label: 'Game of Thrones' },
+  { value: 'Harry Potter', label: 'Harry Potter' },
+  { value: 'Marvel', label: 'Marvel' },
+  { value: 'Movies', label: 'Movies' },
+  { value: 'Cartoons', label: 'Cartoons' },
+  { value: 'Exclusive', label: 'Exclusive' },
+  { value: 'Coming Soon', label: 'Coming Soon' }
+]
 
-export default function EditItem({ updateProduct }) {
+export default function EditItem ({ updateProduct }) {
   let { id } = useParams()
   const [product, setProduct] = useState({})
   const history = useHistory()
@@ -66,6 +79,12 @@ export default function EditItem({ updateProduct }) {
     price: '',
     is_new: false
   })
+
+  const [category, setCategory] = useState('Exclusive')
+
+  const handleCatChange = event => {
+    setCategory(event.target.value)
+  }
 
   const handleTextChange = event => {
     setUserEdited({ ...userEdited, [event.target.id]: event.target.value })
@@ -91,7 +110,6 @@ export default function EditItem({ updateProduct }) {
       .catch(e => {
         history.push('/not-found')
       })
-    // eslint-disable-next-line
   }, [])
   return (
     <>
@@ -99,7 +117,11 @@ export default function EditItem({ updateProduct }) {
         {product.name}
       </Typography>
       <div className='shGriDv2-TwoDivs'>
-        <img src={product.image} alt={product.name} style={{ transform: 'scale(0.8)' }} />
+        <img
+          src={product.image}
+          alt={product.name}
+          style={{ transform: 'scale(0.8)' }}
+        />
 
         <CssBaseline />
         <Container
@@ -113,26 +135,15 @@ export default function EditItem({ updateProduct }) {
               style={{ margin: 0, padding: 10 }}
               InputLabelProps={{ shrink: true }}
               onChange={handleTextChange}
-              value={userEdited.category}
-              placeholder='New category'
-              label='Category'
-              variant='outlined'
-              id='category'
-              fullWidth
-              required
-            />
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleTextChange}
               value={userEdited.name}
               placeholder='New Name'
-              label='Name'
               variant='outlined'
+              label='Name'
               id='name'
               fullWidth
               required
             />
+
             <TextField
               style={{ margin: 0, padding: 10 }}
               InputLabelProps={{ shrink: true }}
@@ -152,18 +163,38 @@ export default function EditItem({ updateProduct }) {
               fullWidth
               required
             />
+            <TextField
+              style={{ margin: 0, padding: 10 }}
+              InputLabelProps={{ shrink: true }}
+              helperText="Please select your category"
+              onChange={handleCatChange}
+              variant='outlined'
+              value={category}
+              label='Category'
+              id='category'
+              fullWidth
+              required
+              select
+            >
+              {categories.map(option => (
+                <MenuItem key={option.value} value={option.value}>
+                  {option.label}
+                </MenuItem>
+              ))}
+            </TextField>
             <List>
               <ListItem alignItems='center'>
                 <Checkbox
-                  checked={checked}
-                  onChange={handleChange}
                   inputProps={{ 'aria-label': 'primary checkbox' }}
+                  onChange={handleChange}
+                  checked={checked}
                   required
                 />
                 <TextField
+                  label='Is a New Product .?'
+                  className={classes.check}
                   fullWidth
                   disabled
-                  placeholder='Is a New Product .?'
                 />
               </ListItem>
             </List>

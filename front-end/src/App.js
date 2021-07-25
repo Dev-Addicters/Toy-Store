@@ -18,7 +18,7 @@ import Four0Four from './Pages/Four0Four'
 
 const API = apiURL()
 
-export default function App() {
+export default function App () {
   const [products, setProducts] = useState([])
   const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
@@ -55,7 +55,7 @@ export default function App() {
   }
 
   // CREATE
-  const addNewCard = async (newCard) => {
+  const addNewCard = async newCard => {
     try {
       // eslint-disable-next-line
       const res = await axios.post(`${API}/products/`, newCard)
@@ -77,7 +77,7 @@ export default function App() {
 
   // SHOW
 
-  const getUserSearch = async (userInput) => {
+  const getUserSearch = async userInput => {
     try {
       const { data } = await axios.get(`${API}/products?search=${userInput}`)
       setResults(data)
@@ -122,57 +122,29 @@ export default function App() {
     for (const id in objectCartItems) {
       buyItems.push({ id, quantity: -objectCartItems[id] })
     }
-    axios.put(
-      `${API}/products/${buyItems.map(item => item.id).join(',')}`,
-      buyItems
-    ).then(res => {
-      setPlacingOrder(true)
-      toast.success('Thank you, your order has been placed!', {
-        position: "top-center",
-        autoClose: 4000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-      });
-      setTimeout(() => {
-        setObjectCartItems({})
-        setPlacingOrder(false)
-      }, 4000);
-    })
+    axios
+      .put(
+        `${API}/products/${buyItems.map(item => item.id).join(',')}`,
+        buyItems
+      )
+      .then(res => {
+        setPlacingOrder(true)
+        toast.success('Thank you, your order has been placed!')
+        setTimeout(() => {
+          setObjectCartItems({})
+          setPlacingOrder(false)
+        }, 2000)
+      })
       .catch(e => {
         setPlacingOrder(false)
-        toast.error('Something went wrong.', {
-          position: "top-center",
-          autoClose: 4000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: false,
-          progress: undefined,
-        })
+        toast.error('Something went wrong.')
       })
   }
 
-
-
   return (
     <Router>
-      <ToastContainer
-        position='top-center'
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      ></ToastContainer>
       <NavBar objectCartItems={objectCartItems} getUserSearch={getUserSearch} />
       <main>
-        {alert}
         <Switch>
           <Route exact path='/'>
             <Home />
@@ -189,10 +161,7 @@ export default function App() {
             />
           </Route>
           <Route exact path='/results'>
-            <Results
-              results={results}
-              addToCart={addToCart}
-            />
+            <Results results={results} addToCart={addToCart} />
           </Route>
           <Route exact path='/products/category/:category'>
             <Products
@@ -224,7 +193,20 @@ export default function App() {
           </Route>
         </Switch>
       </main>
-      <Footer objectCartItems={objectCartItems} />
+      <div className='footerContainer'>
+        <Footer objectCartItems={objectCartItems} />
+        <ToastContainer
+          position='top-center'
+          autoClose={2000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        ></ToastContainer>
+      </div>
     </Router>
   )
 }

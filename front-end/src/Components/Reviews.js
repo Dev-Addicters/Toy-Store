@@ -58,11 +58,17 @@ const AccordionDetails = withStyles(theme => ({
 const useStyles = makeStyles({
   reviewDiv: {
     display: 'grid',
-    gridTemplateRows: 'auto 1fr'
+    gridTemplateRows: 'auto auto'
   },
   h1product: {
+    width: '100vw',
     display: 'grid',
-    placeItems: 'center'
+    gridArea: '1 / 1 / 2 / 1',
+    padding: '10px',
+    textAlign: 'center',
+    backgroundColor: '#a29684',
+    color: '#292723',
+    fontSize: '52px'
   },
   buttonsDiv: {
     width: '100%',
@@ -163,7 +169,9 @@ export default function Reviews ({ productId }) {
 
   return (
     <div className={classes.reviewDiv}>
-      <h1 className={classes.h1product}>REVIEWS</h1>
+      <h1 className={classes.h1product} id='reviewsBlock'>
+        REVIEWS
+      </h1>
       <div>
         {allReviews.map((review, idx) => {
           return (
@@ -174,7 +182,7 @@ export default function Reviews ({ productId }) {
             >
               <AccordionSummary
                 aria-controls='panel1d-content'
-                id='panel1d-header'
+                id={`panel${idx + 1}d-header`}
               >
                 <Typography variant='h4'>{review.title}</Typography>
               </AccordionSummary>
@@ -237,19 +245,32 @@ export default function Reviews ({ productId }) {
             </Accordion>
           )
         })}
-        <CssBaseline />
-        <Container maxWidth='xl' component={Paper} elevation={3}>
-          <Typography
-            color='textSecondary'
-            style={{ fontSize: '30px' }}
-            gutterBottom
+        <Accordion
+          square
+          expanded={expanded === `panel${allReviews.length + 1}`}
+          onChange={handleChange(`panel${allReviews.length + 1}`)}
+        >
+          <AccordionSummary
+            aria-controls='panel1d-content'
+            id={`panel${allReviews.length}d-header`}
           >
-            <b>Make a New Review</b>
-          </Typography>
-          <div className={classes.fit}>
-            <ReviewsForm newForm={true} createReview={createReview} />
-          </div>
-        </Container>
+            <Typography
+              color='textSecondary'
+              style={{ fontSize: '30px' }}
+              gutterBottom
+            >
+              <b>Make a New Review</b>
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            <CssBaseline />
+            <Container maxWidth='xl' component={Paper} elevation={3}>
+              <div className={classes.fit}>
+                <ReviewsForm newForm={true} createReview={createReview} />
+              </div>
+            </Container>
+          </AccordionDetails>
+        </Accordion>
       </div>
     </div>
   )

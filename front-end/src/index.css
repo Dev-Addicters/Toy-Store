@@ -56,8 +56,9 @@ div.tabs > a:hover > div {
 }
 
 main {
+  grid-area: 2 / 1 / 3 / -1;
   background-color: blanchedalmond;
-  height: fit-content;
+  height: 1fr;
 }
 
 .four0four {
@@ -80,7 +81,7 @@ main {
   display: flex;
   flex-direction: row;
   text-align: center;
-  background-color: black;
+  background-color: #181817;
   justify-content: space-evenly;
   height: 100px;
   min-height: 10vh;
@@ -92,6 +93,10 @@ main {
 .navBar {
   visibility: visible;
   box-shadow: 0 12px 6.1px rgba(0, 0, 0, 0.07), 0 21px 51px rgba(0, 0, 0, 0.028);
+  width: 100vw;
+  position: fixed;
+  /* top: 0; */
+  z-index: 9999;
 }
 .footer {
   visibility: hidden;
@@ -268,19 +273,28 @@ main {
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: auto 1fr minmax(40px, 60px);
+  grid-template-rows: auto 1fr;
   overflow: scroll;
 }
-
+.showGridDiv1 {
+  width: 100vw;
+  height: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 .showGridDiv2 {
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-rows: minmax(10%, 15%) 1fr 1fr;
+  grid-template-rows: auto auto auto;
 }
 
 .shGriDv2-TwoDivs {
-  width: 100%;
+  width: 100vw;
   height: auto;
   display: grid;
   grid-template-columns: minmax(20%, 35%) 1fr;
@@ -316,6 +330,13 @@ main {
     font-size: 4em;
     transform: translateY(-14px);
   }
+  main {
+    height: 100%;
+    grid-area: 2 / 1 / 3 / 2;
+  }
+  .navBar {
+    grid-area: 1 / 1 / 2 / 2;
+  }
   .hidden-visually {
     position: absolute;
     width: 1px;
@@ -333,10 +354,13 @@ main {
     height: auto;
     visibility: visible;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-around;
+    font-size: 2rem;
+    background-color: #181817;
   }
   .footer svg {
+    transform: translateY(7px);
     font-size: 2em;
     color: azure;
   }
@@ -354,6 +378,15 @@ main {
     width: 100vw;
     height: 72vh;
   }
+  .footerContainer {
+    grid-area: 3 / 1 / 4 / 2;
+    background-color: #181817;
+  }
+
+  #root {
+    display: grid;
+    grid-template-rows: 100px auto auto;
+  }
 
   #searchIcon {
     display: none;
@@ -361,13 +394,22 @@ main {
 }
 @media screen and (max-width: 380px) {
   main {
-    height: 66vh;
+    min-height: 66vh;
+    grid-area: 2 / 1 / 3 / -1;
+    overflow: scroll;
   }
+
   h1 {
     transform: translateY(14px);
   }
+
+  .home > img {
+    height: 66vh;
+    width: 100vw;
+  }
   .navBar {
     height: auto;
+    grid-area: 1 / 1 / 2 / 2;
     display: grid;
     grid-template-rows: 1fr;
     place-items: center;
@@ -377,6 +419,7 @@ main {
     align-self: center;
     width: auto;
     margin: 0;
+    padding-left: 2ch;
   }
   .navBar a:nth-child(1) {
     display: flex;
@@ -384,12 +427,15 @@ main {
   .top {
     grid-area: 1 / 1 / -1 / -1;
     margin: 4px 0px 0px 0px;
+    font-size: 3rem;
   }
   .navBar form {
     width: 100%;
   }
+
   .footer {
-    transform: translateY(11px);
+    font-size: 1.2rem;
+    align-items: center;
   }
   .MuiTable-root {
     width: 100%;
@@ -420,6 +466,136 @@ main {
     margin-top: 1vh;
     height: 65vh;
   }
+  .footerContainer {
+    /* position: fixed; */
+    /* max-height: 82px; */
+    margin: 0;
+    padding: 0;
+    background-color: #181817;
+  }
+
+  #root {
+    display: grid;
+    grid-template-rows: 158px auto auto;
+  }
+
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > thead
+    > tr
+    > th:nth-child(3) {
+    transform: translateX(-16px);
+  }
+
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr
+    > td:nth-child(3)
+    > div {
+    display: inline;
+  }
+
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr
+    > td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignCenter,
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr:nth-child(1)
+    > td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignRight,
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr
+    > td:nth-child(3),
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr:nth-child(2)
+    > td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignRight {
+    padding: 0px;
+    position: relative;
+  }
+
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr
+    > td:nth-child(3)
+    > div,
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr:nth-child(1)
+    > td.MuiTableCell-root.MuiTableCell-body.MuiTableCell-alignRight
+    > p {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr:nth-child(1)
+    > td:nth-child(3)
+    > div {
+    padding: 0;
+    align-items: center;
+  }
+  #root
+    > main
+    > div
+    > div.MuiPaper-root.MuiTableContainer-root.MuiPaper-elevation3.MuiPaper-rounded
+    > table
+    > tbody
+    > tr
+    > td:nth-child(3)
+    > div
+    > button.MuiButtonBase-root.MuiIconButton-root.Mui-disabled.Mui-disabled {
+    transform: translateX(5px);
+  }
+  #root
+    > main
+    > div
+    > div.MuiContainer-root.MuiContainer-maxWidthMd
+    > div
+    > div.MuiCardContent-root
+    > div:nth-child(10)
+    > h4
+    > b {
+    font-size: 1.8rem;
+  }
 
   #root
     > main
@@ -429,9 +605,9 @@ main {
     > div
     > div.makeStyles-buttonsDiv-4
     > a
-    > span.MuiButton-label
+    > span
     > h2 {
-    font-size: 0.75em;
+    font-size: 0.8rem;
   }
   #root
     > main

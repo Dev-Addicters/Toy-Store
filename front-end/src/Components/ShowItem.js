@@ -1,10 +1,14 @@
 import React from 'react'
-import { Link, withRouter } from 'react-router-dom'
-import Reviews from './Reviews'
+
+import { Link, withRouter, useHistory } from 'react-router-dom'
+import Reviews from "./Reviews";
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import { ThemeProvider, createTheme } from '@material-ui/core/styles'
+import axios from 'axios';
+import { apiURL } from '../util/apiURL';
+import { toast } from 'react-toastify';
 
 const theme = createTheme({
   typography: {
@@ -54,9 +58,25 @@ const useStyles = makeStyles({
   }
 })
 
-function ItemsApi (props) {
+const API = apiURL()
+
+function ItemsApi(props) {
+
   const { products, id, addToCart } = props
   const classes = useStyles()
+  const history = useHistory()
+
+  const handleDelete = id => {
+    axios.delete(`${API}/products/${id}`)
+      .then(res => {
+        toast.success('Product deleted successfully!')
+        history.push(`/products`)
+      })
+      .catch(e => {
+        toast.error('Something went wrong.')
+      })
+  }
+
   return (
     <div className='showGridDiv2'>
       <Typography variant='h3' className={classes.h1product}>
@@ -101,13 +121,9 @@ function ItemsApi (props) {
                 Edit Product
               </Typography>
             </Button>
-            <Button
-              onClick={() => addToCart(products.id)}
-              variant='outlined'
-              className={classes.productshowB}
-            >
+            <Button onClick={() => handleDelete(products.id)} variant='outlined' className={classes.productshowB}>
               <Typography variant='h6' component='h2' className={classes.txt}>
-                Add to Cart
+                Delete Product
               </Typography>
             </Button>
           </div>

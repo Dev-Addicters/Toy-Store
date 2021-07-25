@@ -301,8 +301,8 @@ export default function CartTable({
             <CardActions>
               {placingOrder ?
                 <Button variant='outlined' className={classes.pay} >
-                  <Typography variant='h6' component='h2'>
-                    Please wait while placing order...
+                  <Typography variant='h6' component='h2' style={{textTransform:'capitalize'}}>
+                    Placing order...
                   </Typography>
                 </Button>
                 :

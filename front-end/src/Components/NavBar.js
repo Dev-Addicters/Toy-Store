@@ -13,8 +13,8 @@ import cartoon from './images/cartoon-head.png'
 import exclusive from './images/exclusive-head.png'
 import soon from './images/soon-head.png'
 
-export default function NavBar({ objectCartItems, getUserSearch }) {
-  const history = useHistory();
+export default function NavBar ({ objectCartItems, getUserSearch }) {
+  const history = useHistory()
   const [search, setSearch] = useState('')
   const handlesearchChange = e => {
     setSearch(e.target.value)
@@ -22,11 +22,10 @@ export default function NavBar({ objectCartItems, getUserSearch }) {
 
   const submitUserSearch = event => {
     event.preventDefault()
-    history.push("/results")
+    history.push('/results')
     getUserSearch(search)
     setSearch('')
   }
-
 
   const cartQty = Object.values(objectCartItems).reduce(
     (acc, item) => (acc += item),
@@ -133,7 +132,11 @@ export default function NavBar({ objectCartItems, getUserSearch }) {
 
       <form>
         <SearchIcon id='searchIcon' />
-        <input className='navInput' onKeyPress={(e) => e.key === 'Enter' && submitUserSearch(e)} onChange={handlesearchChange} ></input>
+        <input
+          className='navInput'
+          onKeyPress={e => e.key === 'Enter' && submitUserSearch(e)}
+          onChange={handlesearchChange}
+        ></input>
       </form>
       <Link to='/' className='navProfile hidden-visually '>
         <AccountCircleIcon id='userLogin' />

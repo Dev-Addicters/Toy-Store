@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 
-export default function ReviewsForm({
+export default function ReviewsForm ({
   newForm,
   createReview,
   editReview,
@@ -56,7 +56,12 @@ export default function ReviewsForm({
   return (
     <>
       <CssBaseline />
-      <Container maxWidth='sm' component={Paper} elevation={3}>
+      <Container
+        maxWidth='sm'
+        component={Paper}
+        elevation={3}
+        style={{ width: '100%', height: '100%', padding: '30px' }}
+      >
         <form onSubmit={handleSubmit}>
           <TextField
             style={{ margin: 0, padding: 10 }}

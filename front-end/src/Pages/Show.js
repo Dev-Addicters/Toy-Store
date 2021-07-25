@@ -45,7 +45,6 @@ export default function Show ({ product, addToCart }) {
       .catch(e => {
         history.push('/not-found')
       })
-    // eslint-disable-next-line
   }, [])
 
   return (
@@ -62,13 +61,12 @@ export default function Show ({ product, addToCart }) {
           </Typography>
         </Button>
         <Button
-          component={Link}
-          to={`/delete-confirmation`}
+          onClick={() => addToCart(id)}
           variant='outlined'
           className={classes.productshowB}
         >
           <Typography variant='h6' component='h2' className={classes.txt}>
-            DELETE
+            ADD TO CART
           </Typography>
         </Button>
         <Button

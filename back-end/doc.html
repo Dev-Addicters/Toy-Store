@@ -85,7 +85,7 @@
     <br />
     <h3 class="crud" id="POSTrestrictions">POST</h3>
     <h3 class="endpoint">/products</h3>
-    <p>When sending a request to post one product, both sending a json object {} or an array of an object [{}] are allowed. When posting more than one product, it is required to be an array of objects.</p>
+    <p>When sending a request to post one product, sending a json object {} or an array of an object [{}] is allowed. When posting more than one product, it is required to be an array of objects.</p>
     <p>Each object is required to be in this format and keys must exist:</p>
     <pre>
     {
@@ -101,7 +101,7 @@
     <h3 class="crud">PUT</h3>
     <h3 class="endpoint">/products/{ids}</h3>
     <p>See <a href="#GETexamples">GET endpoint</a> for actual link examples</p>
-    <p>When sending a request to update one product, both sending a json object {} or an array of an object [{}] are allowed. When updating more than one product, separate ids by comma " , " and send an array of objects.</p>
+    <p>When sending a request to update one product, sending a json object {} or an array of an object [{}] is allowed. When updating more than one product, separate ids by comma " , " and send an array of objects.</p>
     <p><strong>NOTE:</strong> It is not required to have all the keys when sending a PUT request. If updating quantity is needed only, { "quantity": -2 } will work.</p>
     <p>Quantity is updated according to value in database, if it is 5 in database, sending a -2 will update the quantity to 3 in database, quantity in database can not be below 0.</p>
     <br />

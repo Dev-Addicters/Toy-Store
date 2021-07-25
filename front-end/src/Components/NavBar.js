@@ -13,7 +13,7 @@ import cartoon from './images/cartoon-head.png'
 import exclusive from './images/exclusive-head.png'
 import soon from './images/soon-head.png'
 
-export default function NavBar ({ objectCartItems, getUserSearch }) {
+export default function NavBar({ objectCartItems, getUserSearch }) {
   const history = useHistory()
   const [search, setSearch] = useState('')
   const handlesearchChange = e => {
@@ -24,7 +24,6 @@ export default function NavBar ({ objectCartItems, getUserSearch }) {
     event.preventDefault()
     history.push('/results')
     getUserSearch(search)
-    setSearch('')
   }
 
   const cartQty = Object.values(objectCartItems).reduce(

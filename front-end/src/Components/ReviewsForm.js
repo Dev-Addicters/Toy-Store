@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router-dom'
 
 import CssBaseline from '@material-ui/core/CssBaseline'
 import TextField from '@material-ui/core/TextField'
@@ -16,6 +16,7 @@ export default function ReviewsForm ({
   reviewDetails
 }) {
   const { id } = useParams()
+  const history = useHistory()
   const [userReview, setUserReview] = useState({
     reviewer: '',
     title: '',
@@ -126,7 +127,7 @@ export default function ReviewsForm ({
             </Button>
             <div>&emsp;</div>
             <Button
-              onClick={() => window.open(`/products/${id}`, '_self')}
+              onClick={() => history.goBack()}
               variant='outlined'
               fullWidth
             >

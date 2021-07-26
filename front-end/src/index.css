@@ -360,7 +360,6 @@ main {
     background-color: #181817;
   }
   .footer svg {
-    transform: translateY(7px);
     font-size: 2em;
     color: azure;
   }

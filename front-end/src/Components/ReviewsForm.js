@@ -125,14 +125,6 @@ export default function ReviewsForm ({
             <Button variant='outlined' type='submit' fullWidth>
               Submit
             </Button>
-            <div>&emsp;</div>
-            <Button
-              onClick={() => history.goBack()}
-              variant='outlined'
-              fullWidth
-            >
-              Cancel
-            </Button>
           </div>
         </form>
       </Container>

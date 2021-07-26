@@ -169,7 +169,7 @@ export default function EditItem ({ updateProduct }) {
                 helperText='Please select your category'
                 onChange={handleCatChange}
                 variant='outlined'
-                value={product.category}
+                value={userEdited.category}
                 label='Category'
                 id='category'
                 fullWidth
@@ -188,7 +188,7 @@ export default function EditItem ({ updateProduct }) {
                 style={{ margin: 0, padding: 10 }}
                 InputLabelProps={{ shrink: true }}
                 onChange={handleTextChange}
-                value={product.image}
+                value={userEdited.image}
                 placeholder='http://'
                 label='Image URL'
                 variant='outlined'

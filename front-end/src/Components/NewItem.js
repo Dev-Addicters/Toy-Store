@@ -100,14 +100,13 @@ export default function NewItem (props) {
     name: '',
     price: '',
     image: '',
-    category: '',
+    category: 'Exclusive',
     quantity: '',
     is_new: true
   })
-  const [category, setCategory] = useState('Exclusive')
 
   const handleCatChange = event => {
-    setCategory(event.target.value)
+    setNewProduct({...newProduct, category: event.target.value})
   }
   const handleInput = e => {
     const { id, value } = e.target
@@ -253,10 +252,9 @@ export default function NewItem (props) {
                     {option.label}
                   </MenuItem>
                 ))}
-              </TextField>
+             </TextField>
               <br />
               <br />
-
               <TextField
                 style={{ margin: 0, padding: 10 }}
                 InputLabelProps={{ shrink: true }}

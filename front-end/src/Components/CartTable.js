@@ -223,7 +223,7 @@ export default function CartTable ({
                 style={{ fontSize: '30px' }}
                 gutterBottom
               >
-                Summary <b>{numItems}</b> Items
+                Summary <b>{numItems}</b>{numItems > 1 ? ' items' : ' item'}
               </Typography>
             </Container>
             <Divider />

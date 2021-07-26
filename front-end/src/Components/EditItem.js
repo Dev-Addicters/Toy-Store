@@ -75,17 +75,15 @@ export default function EditItem ({ updateProduct }) {
   const [checked, setChecked] = useState(false)
 
   const [userEdited, setUserEdited] = useState({
-    category: '',
+    category: product.category,
     name: '',
     price: '',
     image: '',
     is_new: false
   })
 
-  const [category, setCategory] = useState(product.category)
-
   const handleCatChange = event => {
-    setCategory(event.target.value)
+    setUserEdited({...userEdited, category: event.target.value})
   }
 
   const handleTextChange = event => {
@@ -171,7 +169,7 @@ export default function EditItem ({ updateProduct }) {
                 helperText='Please select your category'
                 onChange={handleCatChange}
                 variant='outlined'
-                value={category}
+                value={product.category}
                 label='Category'
                 id='category'
                 fullWidth
@@ -179,7 +177,7 @@ export default function EditItem ({ updateProduct }) {
                 select
               >
                 {categories.map(option => (
-                  <MenuItem key={option.value} value={option.value}>
+                  <MenuItem key={option.value} value={option.value} >
                     {option.label}
                   </MenuItem>
                 ))}
@@ -205,7 +203,6 @@ export default function EditItem ({ updateProduct }) {
                     onChange={handleChange}
                     checked={checked}
                     color='black'
-                    required
                   />
                   <TextField
                     label='Is a New Product .?'
@@ -223,7 +220,7 @@ export default function EditItem ({ updateProduct }) {
                 <div>&emsp;</div>
                 <Button
                   onClick={() => {
-                    history.push(`/products/${id}`)
+                    history.goBack()
                   }}
                   variant='outlined'
                   type='button'

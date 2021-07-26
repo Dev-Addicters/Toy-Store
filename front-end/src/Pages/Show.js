@@ -1,15 +1,14 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router-dom'
+import { useParams } from 'react-router'
+import { apiURL } from '../util/apiURL.js'
+import axios from 'axios'
+
 import ShowItem from '../Components/ShowItem'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-import { apiURL } from '../util/apiURL.js'
-import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
-import axios from 'axios'
 
 const API = apiURL()
 
@@ -28,31 +27,29 @@ const useStyles = makeStyles({
   }
 })
 
-export default function Show ({ product, addToCart }) {
+export default function Show ({ addToCart, handleDelete }) {
   const classes = useStyles()
 
-  let { id } = useParams()
-  const [products, setProducts] = useState({})
-
+  const [product, setProduct] = useState({})
   const history = useHistory()
+  let { id } = useParams()
 
   useEffect(() => {
     axios
       .get(`${API}/products/${id}`)
       .then(res => {
-        setProducts(res.data[0])
+        setProduct(res.data[0])
       })
       .catch(e => {
         history.push('/not-found')
       })
-  }, [])
+  }, [product])
 
   return (
     <div className='showGrid'>
       <div className='showGridDiv1'>
         <Button
-          component={Link}
-          to={`/products`}
+          onClick={() => history.goBack()}
           variant='outlined'
           className={classes.productshowB}
         >
@@ -66,7 +63,7 @@ export default function Show ({ product, addToCart }) {
           className={classes.productshowB}
         >
           <Typography variant='h6' component='h2' className={classes.txt}>
-            ADD TO CART
+            BUY
           </Typography>
         </Button>
         <Button
@@ -81,7 +78,12 @@ export default function Show ({ product, addToCart }) {
         <br />
         <br />
       </div>
-      <ShowItem products={products} id={id} addToCart={addToCart} />
+      <ShowItem
+        product={product}
+        id={id}
+        addToCart={addToCart}
+        handleDelete={handleDelete}
+      />
     </div>
   )
 }

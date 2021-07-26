@@ -1,10 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Badge from '@material-ui/core/Badge'
-import StorefrontIcon from '@material-ui/icons/Storefront'
 import ViewListIcon from '@material-ui/icons/ViewList'
-import AccountCircleIcon from '@material-ui/icons/AccountCircle'
+import StorefrontIcon from '@material-ui/icons/Storefront'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 
 export default function Footer ({ objectCartItems }) {
   const cartQty = Object.values(objectCartItems).reduce(

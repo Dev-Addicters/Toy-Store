@@ -95,7 +95,6 @@ main {
   box-shadow: 0 12px 6.1px rgba(0, 0, 0, 0.07), 0 21px 51px rgba(0, 0, 0, 0.028);
   width: 100vw;
   position: fixed;
-  /* top: 0; */
   z-index: 9999;
 }
 .footer {
@@ -120,7 +119,7 @@ main {
   width: 300px;
   font-size: 25px;
   border-radius: 30px;
-  padding: 8px 0px 0px 20px;
+  padding: 1px 0px 0px 20px;
 }
 .navProfile,
 .navCar {
@@ -252,7 +251,7 @@ main {
 }
 
 .productshowB:hover {
-  background: "#1b5e20";
+  background: #1b5e20
 }
 
 .garabe {
@@ -325,6 +324,7 @@ main {
 #searchIcon {
   transform: translateY(8px);
 }
+
 @media screen and (max-width: 1100px) {
   h1 {
     font-size: 4em;
@@ -467,8 +467,6 @@ main {
     height: 65vh;
   }
   .footerContainer {
-    /* position: fixed; */
-    /* max-height: 82px; */
     margin: 0;
     padding: 0;
     background-color: #181817;
@@ -585,42 +583,38 @@ main {
     > button.MuiButtonBase-root.MuiIconButton-root.Mui-disabled.Mui-disabled {
     transform: translateX(5px);
   }
-  #root
-    > main
-    > div
-    > div.MuiContainer-root.MuiContainer-maxWidthMd
-    > div
-    > div.MuiCardContent-root
-    > div:nth-child(10)
-    > h4
-    > b {
+  #root > main > div > div > div > div > div > h4 > b {
     font-size: 1.8rem;
   }
+  #root > main > div > div > div > ul {
+    padding: 0;
+    height: 220%;
+  }
 
-  #root
-    > main
-    > div
-    > div.showGridDiv2
-    > div.shGriDv2-TwoDivs
-    > div
-    > div.makeStyles-buttonsDiv-4
-    > a
-    > span
-    > h2 {
-    font-size: 0.8rem;
+  #root > main > div > div > div > ul > li > div > div {
+    transform: translateY(-330px);
+  }
+
+  #root > main > div > div > div > ul > li > div > div > div > div {
+    font-size: 1.5rem;
   }
   #root
     > main
     > div
-    > div.showGridDiv2
-    > div.shGriDv2-TwoDivs
     > div
-    > div.makeStyles-buttonsDiv-4
+    > div
+    > ul
+    > li
+    > div
+    > div
+    > div
     > button
-    > span.MuiButton-label
-    > h2 {
-    font-size: 0.75em;
+    > span
+    > svg {
+    width: 36px;
+    height: 36px;
   }
+
   #searchIcon {
     display: none;
   }

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
+import Button from '@material-ui/core/Button'
 import newProduct from './images/new.png'
 import onePixel from './images/1px.png'
-import Button from '@material-ui/core/Button'
-import { Link } from 'react-router-dom'
 
 export default function ProductCard ({ products, addToCart, id }) {
   return (

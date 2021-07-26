@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { apiURL } from './util/apiURL.js'
 import axios from 'axios'
+
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Four0Four from './Pages/Four0Four'
+import Results from './Pages/Results.js'
 import NavBar from './Components/NavBar'
 import Footer from './Components/Footer'
-import Home from './Pages/Home'
 import Products from './Pages/Products'
-import New from './Pages/New'
 import Show from './Pages/Show'
+import Home from './Pages/Home'
 import Edit from './Pages/Edit'
 import Cart from './Pages/Cart'
-import Results from './Pages/Results.js'
-import Four0Four from './Pages/Four0Four'
+import New from './Pages/New'
 
 const API = apiURL()
 
 export default function App () {
-  const [products, setProducts] = useState([])
-  const [cartItems, setCartItems] = useState([])
   const [objectCartItems, setObjectCartItems] = useState({})
   const [placingOrder, setPlacingOrder] = useState(false)
+  const [cartItems, setCartItems] = useState([])
+  const [products, setProducts] = useState([])
   const [results, setResults] = useState([])
 
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function App () {
       objItems[id.toString()] = 0
     }
     objItems[id.toString()] += 1
-
     setObjectCartItems(objItems)
   }
 
@@ -57,8 +56,7 @@ export default function App () {
   // CREATE
   const addNewCard = async newCard => {
     try {
-      // eslint-disable-next-line
-      const res = await axios.post(`${API}/products/`, newCard)
+      await axios.post(`${API}/products/`, newCard)
       toast.success('Product added to Inventory!')
     } catch (e) {
       toast.error('Something went wrong.')
@@ -76,7 +74,6 @@ export default function App () {
   }
 
   // SHOW
-
   const getUserSearch = async userInput => {
     try {
       const { data } = await axios.get(`${API}/products?search=${userInput}`)
@@ -109,8 +106,7 @@ export default function App () {
   // UPDATE
   const updateProduct = async (id, editedProduct) => {
     try {
-      // eslint-disable-next-line
-      const res = await axios.put(`${API}/products/${id}`, editedProduct)
+      await axios.put(`${API}/products/${id}`, editedProduct)
       toast.success('Successful Modification!')
     } catch (e) {
       toast.error('Something went wrong.')
@@ -137,6 +133,21 @@ export default function App () {
       })
       .catch(e => {
         setPlacingOrder(false)
+        toast.error('Something went wrong.')
+      })
+  }
+
+  // DELETE
+  const handleDelete = id => {
+    axios
+      .delete(`${API}/products/${id}`)
+      .then(res => {
+        toast.success('Product deleted successfully!')
+        setTimeout(function () {
+          window.open('/products', '_self')
+        }, 2000)
+      })
+      .catch(e => {
         toast.error('Something went wrong.')
       })
   }
@@ -183,7 +194,7 @@ export default function App () {
             />
           </Route>
           <Route exact path='/products/:id'>
-            <Show product={products} addToCart={addToCart} />
+            <Show addToCart={addToCart} handleDelete={handleDelete} />
           </Route>
           <Route exact path='/products/:id/edit'>
             <Edit updateProduct={updateProduct} />

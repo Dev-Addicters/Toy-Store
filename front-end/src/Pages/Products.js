@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import ProductCard from '../Components/ProductCard'
 import { useParams, useRouteMatch } from 'react-router-dom'
 
-export default function Products({
+export default function Products ({
   products,
   addToCart,
   getProductsByCategory,
@@ -18,12 +18,11 @@ export default function Products({
     } else {
       getAllProducts()
     }
-    // eslint-disable-next-line
   }, [category, url])
 
   return (
     <div className='repeatAutoMinMax'>
-      {products.map((product, id) => {
+      {products.map((product) => {
         return (
           <ProductCard
             products={product}

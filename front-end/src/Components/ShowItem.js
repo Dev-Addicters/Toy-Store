@@ -1,14 +1,11 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+import Reviews from './Reviews'
 
-import { Link, withRouter, useHistory } from 'react-router-dom'
-import Reviews from "./Reviews";
-import Button from '@material-ui/core/Button'
+import { ThemeProvider, createTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
-import { ThemeProvider, createTheme } from '@material-ui/core/styles'
-import axios from 'axios';
-import { apiURL } from '../util/apiURL';
-import { toast } from 'react-toastify';
+import Button from '@material-ui/core/Button'
 
 const theme = createTheme({
   typography: {
@@ -58,32 +55,17 @@ const useStyles = makeStyles({
   }
 })
 
-const API = apiURL()
-
-function ItemsApi(props) {
-
-  const { products, id, addToCart } = props
+export default function ItemsApi (props) {
+  const { product, id, handleDelete } = props
   const classes = useStyles()
-  const history = useHistory()
-
-  const handleDelete = id => {
-    axios.delete(`${API}/products/${id}`)
-      .then(res => {
-        toast.success('Product deleted successfully!')
-        history.push(`/products`)
-      })
-      .catch(e => {
-        toast.error('Something went wrong.')
-      })
-  }
 
   return (
     <div className='showGridDiv2'>
       <Typography variant='h3' className={classes.h1product}>
-        {products.name}
+        {product.name}
       </Typography>
       <div className='shGriDv2-TwoDivs'>
-        <img src={products.image} alt={products.name} />
+        <img src={product.image} alt={product.name} />
         <div className='itemDetails'>
           <div className='textDetails'>
             <ThemeProvider theme={theme}>
@@ -91,13 +73,13 @@ function ItemsApi(props) {
                 <div>
                   <p className={classes.txtbg}>&emsp;Category :&emsp;</p>
                 </div>
-                {products.category}
+                {product.category}
               </Typography>
               <Typography variant='h4' className={classes.txtcenter}>
                 <div>
                   <p className={classes.txtbg}>&emsp;Product name:&emsp;</p>
                 </div>
-                {products.name}
+                {product.name}
               </Typography>
               <Typography
                 variant='h4'
@@ -105,7 +87,7 @@ function ItemsApi(props) {
                 gutterbottom
               >
                 <p className={classes.txtbg}>&emsp;Product Price:&emsp;</p>
-                &emsp;$ {products.price}
+                &emsp;$ {product.price}
               </Typography>
             </ThemeProvider>
           </div>
@@ -121,9 +103,13 @@ function ItemsApi(props) {
                 Edit Product
               </Typography>
             </Button>
-            <Button onClick={() => handleDelete(products.id)} variant='outlined' className={classes.productshowB}>
+            <Button
+              onClick={() => handleDelete(product.id)}
+              variant='outlined'
+              className={classes.productshowB}
+            >
               <Typography variant='h6' component='h2' className={classes.txt}>
-                Delete Product
+                Delete
               </Typography>
             </Button>
           </div>
@@ -133,4 +119,3 @@ function ItemsApi(props) {
     </div>
   )
 }
-export default withRouter(ItemsApi)

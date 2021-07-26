@@ -1,11 +1,12 @@
 import React from 'react'
-import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
+import { useHistory } from 'react-router-dom'
+
+import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
-import { useHistory } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
 
 export default function AlertDialog () {
   const [open, setOpen] = React.useState(false)
@@ -22,7 +23,11 @@ export default function AlertDialog () {
 
   return (
     <div style={{ display: 'grid', placeItems: 'center' }}>
-      <Button variant='outlined'  onClick={handleClickOpen} style={{fontSize:'42px', textTransform: 'capitalize', width: '80%'}}> 
+      <Button
+        variant='outlined'
+        onClick={handleClickOpen}
+        style={{ fontSize: '42px', textTransform: 'capitalize', width: '80%' }}
+      >
         Continue Shopping
       </Button>
       <Dialog

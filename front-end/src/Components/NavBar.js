@@ -1,19 +1,20 @@
 import React, { useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import Badge from '@material-ui/core/Badge'
+
 import AccountCircleIcon from '@material-ui/icons/AccountCircle'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart'
+import exclusive from './images/exclusive-head.png'
 import SearchIcon from '@material-ui/icons/Search'
+import cartoon from './images/cartoon-head.png'
 import disney from './images/disney-head.png'
-import got from './images/got-head.png'
-import harry from './images/harry-head.png'
 import marvel from './images/marvel-head.png'
 import movies from './images/movies-head.png'
-import cartoon from './images/cartoon-head.png'
-import exclusive from './images/exclusive-head.png'
+import harry from './images/harry-head.png'
+import Badge from '@material-ui/core/Badge'
 import soon from './images/soon-head.png'
+import got from './images/got-head.png'
 
-export default function NavBar({ objectCartItems, getUserSearch }) {
+export default function NavBar ({ objectCartItems, getUserSearch }) {
   const history = useHistory()
   const [search, setSearch] = useState('')
   const handlesearchChange = e => {
@@ -24,6 +25,7 @@ export default function NavBar({ objectCartItems, getUserSearch }) {
     event.preventDefault()
     history.push('/results')
     getUserSearch(search)
+    setSearch('')
   }
 
   const cartQty = Object.values(objectCartItems).reduce(
@@ -132,6 +134,7 @@ export default function NavBar({ objectCartItems, getUserSearch }) {
       <form>
         <SearchIcon id='searchIcon' />
         <input
+          value={search}
           className='navInput'
           onKeyPress={e => e.key === 'Enter' && submitUserSearch(e)}
           onChange={handlesearchChange}

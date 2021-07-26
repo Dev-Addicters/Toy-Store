@@ -27,7 +27,6 @@ export default function ReviewsForm ({
     setUserReview(
       reviewDetails ? reviewDetails : { ...userReview, product_id: id }
     )
-    // eslint-disable-next-line
   }, [])
 
   const handleTextChange = event => {
@@ -121,12 +120,18 @@ export default function ReviewsForm ({
             fullWidth
             required
           />
-
           <div style={{ margin: 0, padding: 14 }}>
-            <Button variant='outlined' color='primary' type='submit' fullWidth>
+            <Button variant='outlined' type='submit' fullWidth>
               Submit
             </Button>
             <div>&emsp;</div>
+            <Button
+              onClick={() => window.open(`/products/${id}`, '_self')}
+              variant='outlined'
+              fullWidth
+            >
+              Cancel
+            </Button>
           </div>
         </form>
       </Container>

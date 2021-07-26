@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import { apiURL } from '../util/apiURL.js'
 import ReviewsForm from './ReviewsForm'
-import Paper from '@material-ui/core/Paper'
+import axios from 'axios'
 
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
-import { withStyles, makeStyles } from '@material-ui/core/styles'
-import Container from '@material-ui/core/Container'
-import CssBaseline from '@material-ui/core/CssBaseline'
-import Rating from '@material-ui/lab/Rating'
-import MuiAccordion from '@material-ui/core/Accordion'
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary'
 import MuiAccordionDetails from '@material-ui/core/AccordionDetails'
+import { withStyles, makeStyles } from '@material-ui/core/styles'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import MuiAccordion from '@material-ui/core/Accordion'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
+import Button from '@material-ui/core/Button'
+import Rating from '@material-ui/lab/Rating'
+import Paper from '@material-ui/core/Paper'
 
 const Accordion = withStyles({
   root: {
@@ -108,10 +108,6 @@ export default function Reviews ({ productId }) {
   const [expanded, setExpanded] = React.useState('panel1')
   const [editReview, setEditReview] = useState(false)
 
-  const handleChange = panel => (event, newExpanded) => {
-    setExpanded(newExpanded ? panel : false)
-  }
-
   useEffect(() => {
     axios
       .get(`${API}/products/${productId}/itemreviews`)
@@ -123,12 +119,15 @@ export default function Reviews ({ productId }) {
       .catch(e => console.log(e))
   }, [productId])
 
+  const handleChange = panel => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false)
+  }
+
   const createReview = review => {
     axios
       .post(`${API}/products/${productId}/itemreviews`, review)
       .then(res => {
         if (res.data === 'error') throw Error('Invalid data was sent.')
-
         setAllReviews([res.data, ...allReviews])
       })
       .catch(e => console.log(e))
@@ -143,7 +142,6 @@ export default function Reviews ({ productId }) {
       .then(res => {
         const updated = res.data
         if (updated === 'error') throw Error('Invalid data was sent.')
-
         const copy = [...allReviews]
         const index = copy.findIndex(review => review.id === updated.id)
         copy[index] = updated
@@ -158,7 +156,6 @@ export default function Reviews ({ productId }) {
       .then(res => {
         const deleted = res.data
         if (deleted === 'error') throw Error('Invalid data was sent.')
-
         const copy = [...allReviews]
         const index = copy.findIndex(review => review.id === deleted.id)
         copy.splice(index, 1)

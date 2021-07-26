@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
-import CartTable from '../Components/CartTable'
 import ContinueShopping from '../Pages/ContinueShopping'
-export default function Cart({
+import CartTable from '../Components/CartTable'
+
+export default function Cart ({
   cartItems,
   objectCartItems,
   getCartList,
@@ -12,7 +13,6 @@ export default function Cart({
 }) {
   useEffect(() => {
     getCartList()
-    // eslint-disable-next-line
   }, [objectCartItems])
 
   return (

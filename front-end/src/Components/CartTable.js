@@ -1,27 +1,26 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
+
 import TableContainer from '@material-ui/core/TableContainer'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
-
-import DeleteIcon from '@material-ui/icons/Delete'
-import RemoveIcon from '@material-ui/icons/Remove'
-import AddIcon from '@material-ui/icons/Add'
-import Divider from '@material-ui/core/Divider'
-
-import IconButton from '@material-ui/core/IconButton'
-import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Button from '@material-ui/core/Button'
-import Typography from '@material-ui/core/Typography'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/core/styles'
+import CardMedia from '@material-ui/core/CardMedia'
 import Container from '@material-ui/core/Container'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import RemoveIcon from '@material-ui/icons/Remove'
+import DeleteIcon from '@material-ui/icons/Delete'
+import TableRow from '@material-ui/core/TableRow'
+import Divider from '@material-ui/core/Divider'
+import Button from '@material-ui/core/Button'
+import AddIcon from '@material-ui/icons/Add'
+import Paper from '@material-ui/core/Paper'
+import Table from '@material-ui/core/Table'
+import Card from '@material-ui/core/Card'
 
 const useStyles = makeStyles({
   root: {
@@ -45,8 +44,7 @@ const useStyles = makeStyles({
   },
   table: {
     width: '100%',
-    height: '100%',
-
+    height: '100%'
   },
   media: {
     height: 0,
@@ -66,7 +64,7 @@ const useStyles = makeStyles({
   },
   subtotal: {
     width: '100%',
-    boxShadow: '0 3px 3px -2px rgba(0, 0, 0, 0.9)',
+    boxShadow: '0 3px 3px -2px rgba(0, 0, 0, 0.9)'
   },
   pay: {
     backgroundColor: '#263238',
@@ -89,7 +87,7 @@ const useStyles = makeStyles({
   }
 })
 
-export default function CartTable({
+export default function CartTable ({
   cartItems,
   objectCartItems,
   getCartList,
@@ -102,17 +100,17 @@ export default function CartTable({
 
   const numItems = objectCartItems
     ? Object.values(objectCartItems).reduce(
-      (acc, itnum) => (acc += Number(itnum)),
-      0
-    )
+        (acc, itnum) => (acc += Number(itnum)),
+        0
+      )
     : 0
   const subTotal = parseFloat(
     cartItems
       ? cartItems.reduce(
-        (acc, item) =>
-          (acc += Number(item.price) * Number(objectCartItems[`${item.id}`])),
-        0
-      )
+          (acc, item) =>
+            (acc += Number(item.price) * Number(objectCartItems[`${item.id}`])),
+          0
+        )
       : 0
   ).toFixed(2)
   const tax = parseFloat(subTotal * 0.07).toFixed(2)
@@ -123,7 +121,7 @@ export default function CartTable({
   }
 
   return (
-    <React.Fragment >
+    <React.Fragment>
       <CssBaseline />
       <TableContainer component={Paper} elevation={3}>
         <Table className={classes.table} aria-label='simple table'>
@@ -299,19 +297,27 @@ export default function CartTable({
           </CardContent>
           <Container className={classes.centerFlex} fixed>
             <CardActions>
-              {placingOrder ?
-                <Button variant='outlined' className={classes.pay} >
-                  <Typography variant='h6' component='h2' style={{textTransform:'capitalize'}}>
+              {placingOrder ? (
+                <Button variant='outlined' className={classes.pay}>
+                  <Typography
+                    variant='h6'
+                    component='h2'
+                    style={{ textTransform: 'capitalize' }}
+                  >
                     Placing order...
                   </Typography>
                 </Button>
-                :
-                <Button variant='outlined' className={classes.pay} >
-                  <Typography variant='h6' component='h2' onClick={() => buyProducts()}>
+              ) : (
+                <Button variant='outlined' className={classes.pay}>
+                  <Typography
+                    variant='h6'
+                    component='h2'
+                    onClick={() => buyProducts()}
+                  >
                     PAY NOW
                   </Typography>
                 </Button>
-              }
+              )}
             </CardActions>
           </Container>
         </Card>

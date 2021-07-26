@@ -1,21 +1,51 @@
-import React from 'react'
-import { useState } from 'react'
-import { withRouter } from 'react-router-dom'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { makeStyles } from '@material-ui/core/styles'
 
-import Typography from '@material-ui/core/Typography'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import Checkbox from '@material-ui/core/Checkbox'
 import CssBaseline from '@material-ui/core/CssBaseline'
+import { makeStyles } from '@material-ui/core/styles'
+import Typography from '@material-ui/core/Typography'
 import TextField from '@material-ui/core/TextField'
 import Container from '@material-ui/core/Container'
+import ListItem from '@material-ui/core/ListItem'
+import Checkbox from '@material-ui/core/Checkbox'
+import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
-import newProductImg from './images/new.png'
+import List from '@material-ui/core/List'
+
+import ImageListItemBar from '@material-ui/core/ImageListItemBar'
+import ImageListItem from '@material-ui/core/ImageListItem'
+import IconButton from '@material-ui/core/IconButton'
+import ImageList from '@material-ui/core/ImageList'
+import GamesIcon from '@material-ui/icons/Games'
+import itemData from './images/itemData'
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    height: 'fit-content',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper
+  },
+  imageList: {
+    padding: '20px 0px 0px 50px',
+    backgroundColor: 'blanchedalmond',
+    flexWrap: 'nowrap',
+    transform: 'translateZ(0)',
+    height: '600px'
+  },
+  title: {
+    fontSize: '1.8rem',
+    fontWeight: 'bolder',
+    color: '#181817'
+  },
+  titleBar: {
+    borderRadius: '20px',
+    background:
+      'linear-gradient(to top, rgba(24,24,23,0.3) 0%, rgba(24,24,23,0.2) 70%, rgba(24,24,23,0) 100%)'
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -23,10 +53,12 @@ const useStyles = makeStyles(theme => ({
   },
   h1product: {
     width: '100vw',
-    height: 'minmax(5%,8%)',
     display: 'grid',
-    placeItems: 'center',
-    textAlign: 'center'
+    gridArea: '1 / 1 / 2 / 1',
+    padding: '10px',
+    textAlign: 'center',
+    backgroundColor: '#a29684',
+    color: '#292723'
   },
   buttonsDiv: {
     width: '100%',
@@ -50,8 +82,18 @@ const useStyles = makeStyles(theme => ({
     padding: '30px'
   }
 }))
+const categories = [
+  { value: 'Disney', label: 'Disney' },
+  { value: 'Game of Thrones', label: 'Game of Thrones' },
+  { value: 'Harry Potter', label: 'Harry Potter' },
+  { value: 'Marvel', label: 'Marvel' },
+  { value: 'Movies', label: 'Movies' },
+  { value: 'Cartoons', label: 'Cartoons' },
+  { value: 'Exclusive', label: 'Exclusive' },
+  { value: 'Coming Soon', label: 'Coming Soon' }
+]
 
-function NewItem(props) {
+export default function NewItem (props) {
   const classes = useStyles()
   const history = useHistory()
   const [newProduct, setNewProduct] = useState({
@@ -62,10 +104,17 @@ function NewItem(props) {
     quantity: '',
     is_new: true
   })
+  const [category, setCategory] = useState('Exclusive')
 
+  const handleCatChange = event => {
+    setCategory(event.target.value)
+  }
   const handleInput = e => {
     const { id, value } = e.target
-    setNewProduct({ ...newProduct, [id]: id === "quantity" ? Number(value) : value })
+    setNewProduct({
+      ...newProduct,
+      [id]: id === 'quantity' ? Number(value) : value
+    })
   }
   const handleCheck = () => {
     setNewProduct({ ...newProduct, is_new: !newProduct.is_new })
@@ -73,7 +122,17 @@ function NewItem(props) {
   const handleSubmit = e => {
     e.preventDefault()
     props.addNewCard(newProduct)
-    props.history.push('/products')
+    history.push('/products')
+  }
+  const populateForm = item => {
+    setNewProduct({
+      ...newProduct,
+      name: item.name,
+      price: item.price,
+      image: item.image,
+      category: item.category,
+      quantity: Number(item.quantity)
+    })
   }
 
   return (
@@ -82,136 +141,172 @@ function NewItem(props) {
         Fill the form to add a new product
       </Typography>
       <div className='shGriDv2-TwoDivs'>
-        <img
-          src={newProductImg}
-          alt='New-Product'
-          style={{ transform: 'scale(0.7)' }}
-        />
-
-        <CssBaseline />
-        <Container
-          maxWidth='sm'
-          component={Paper}
-          elevation={3}
-          className={classes.fit}
-        >
-          <form onSubmit={handleSubmit}>
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleInput}
-              value={newProduct.category}
-              placeholder='New category'
-              label='Category'
-              variant='outlined'
-              id='category'
-              fullWidth
-              required
-            />
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleInput}
-              value={newProduct.name}
-              placeholder='New Name'
-              label='Name'
-              variant='outlined'
-              id='name'
-              fullWidth
-              required
-            />
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleInput}
-              value={newProduct.price}
-              InputProps={{
-                inputProps: {
-                  max: 100,
-                  min: 0
-                }
-              }}
-              variant='outlined'
-              placeholder='$'
-              label='Price'
-              type='number'
-              id='price'
-              fullWidth
-              required
-            />
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleInput}
-              value={newProduct.quantity}
-              InputProps={{
-                inputProps: {
-                  max: 10000,
-                  min: 0
-                }
-              }}
-              variant='outlined'
-              placeholder='10'
-              label='Quantity'
-              type='number'
-              id='quantity'
-              fullWidth
-              required
-            />
-            <TextField
-              style={{ margin: 0, padding: 10 }}
-              InputLabelProps={{ shrink: true }}
-              onChange={handleInput}
-              value={newProduct.image}
-              placeholder='http://'
-              label='Image URL'
-              variant='outlined'
-              id='image'
-              fullWidth
-              required
-            />
-            <List>
-              <ListItem alignItems='center'>
-                <Checkbox
-                  checked={newProduct.is_new}
-                  onChange={handleCheck}
-                  inputProps={{ 'aria-label': 'primary checkbox' }}
-                  required
+        <div className={classes.root}>
+          <ImageList
+            className={classes.imageList}
+            cols={1}
+            rowHeight='auto'
+            gap={10}
+          >
+            {itemData.map(item => (
+              <ImageListItem key={item.img}>
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className={classes.imagen}
                 />
-                <TextField
-                  fullWidth
-                  disabled
-                  placeholder='Is a New Product .?'
+                <ImageListItemBar
+                  title={item.name}
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title
+                  }}
+                  actionIcon={
+                    <IconButton
+                      aria-label={`star ${item.title}`}
+                      onClick={() => populateForm(item)}
+                    >
+                      <GamesIcon className={classes.title} />
+                    </IconButton>
+                  }
                 />
-              </ListItem>
-            </List>
+              </ImageListItem>
+            ))}
+          </ImageList>
+        </div>
 
-            <div style={{ margin: 0, padding: 14 }}>
-              <Button
+        <div className='itemDetails'>
+          <br />
+          <CssBaseline />
+          <Container
+            maxWidth='sm'
+            component={Paper}
+            elevation={3}
+            className={classes.fit}
+          >
+            <form onSubmit={handleSubmit}>
+              <TextField
+                style={{ margin: 0, padding: 10 }}
+                InputLabelProps={{ shrink: true }}
+                onChange={handleInput}
+                value={newProduct.name}
+                placeholder='New Name'
+                label='Name'
                 variant='outlined'
-                color='primary'
-                type='submit'
+                id='name'
                 fullWidth
-              >
-                Create Product
-              </Button>
-              <div>&emsp;</div>
-              <Button
-                onClick={() => {
-                  history.push(`/products`)
+                required
+              />
+              <TextField
+                style={{ margin: 0, padding: 10 }}
+                InputLabelProps={{ shrink: true }}
+                onChange={handleInput}
+                value={newProduct.quantity}
+                InputProps={{
+                  inputProps: {
+                    max: 10000,
+                    min: 0
+                  }
                 }}
                 variant='outlined'
-                color='primary'
-                type='button'
+                placeholder='10'
+                label='Quantity'
+                type='number'
+                id='quantity'
                 fullWidth
+                required
+              />
+              <TextField
+                style={{ margin: 0, padding: 10 }}
+                InputLabelProps={{ shrink: true }}
+                onChange={handleInput}
+                value={newProduct.price}
+                InputProps={{
+                  inputProps: {
+                    max: 100,
+                    min: 0
+                  }
+                }}
+                variant='outlined'
+                placeholder='$'
+                label='Price'
+                type='number'
+                id='price'
+                fullWidth
+                required
+              />
+              <TextField
+                style={{ margin: 0, padding: 10 }}
+                InputLabelProps={{ shrink: true }}
+                helperText='Please select your category'
+                onChange={handleCatChange}
+                variant='outlined'
+                value={newProduct.category}
+                label='Category'
+                id='category'
+                fullWidth
+                required
+                select
               >
-                Cancel
-              </Button>
-            </div>
-          </form>
-        </Container>
+                {categories.map(option => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ))}
+              </TextField>
+              <br />
+              <br />
+
+              <TextField
+                style={{ margin: 0, padding: 10 }}
+                InputLabelProps={{ shrink: true }}
+                onChange={handleInput}
+                value={newProduct.image}
+                placeholder='http://'
+                label='Image URL'
+                variant='outlined'
+                id='image'
+                fullWidth
+                required
+              />
+              <List>
+                <ListItem alignItems='center'>
+                  <Checkbox
+                    checked={newProduct.is_new}
+                    onChange={handleCheck}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    color='black'
+                    required
+                  />
+                  <TextField
+                    fullWidth
+                    disabled
+                    placeholder='Is a New Product .?'
+                  />
+                </ListItem>
+              </List>
+
+              <div style={{ margin: 0, padding: 14 }}>
+                <Button variant='outlined' type='submit' fullWidth>
+                  Create Product
+                </Button>
+                <div>&emsp;</div>
+                <Button
+                  onClick={() => {
+                    history.push(`/products`)
+                  }}
+                  variant='outlined'
+                  type='button'
+                  fullWidth
+                >
+                  Cancel
+                </Button>
+              </div>
+            </form>
+          </Container>
+          <br />
+        </div>
       </div>
     </>
   )
 }
-export default withRouter(NewItem)
